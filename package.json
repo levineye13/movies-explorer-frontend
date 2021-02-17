@@ -1,7 +1,13 @@
 {
   "name": "movies-explorer-frontend",
-  "version": "0.1.0",
+  "version": "0.0.1",
   "private": true,
+  "description": "Фронтенд проекта movies-explorer на react",
+  "author": {
+    "email": "levineye@yandex.ru",
+    "name": "Oleg Zharov",
+    "url": "https://levineye13.github.io/my-projects"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
