@@ -1,0 +1,26 @@
+.promo {
+  background-color: #073042;
+  padding: 50px 0 60px;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+}
+
+.promo__content {
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.promo__title {
+  margin: 0 0 100px 0;
+  max-width: 626px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: 400;
+  line-height: 130%;
+}
+
+.promo__img {
+  display: block;
+  margin-left: auto;
+  max-width: 100%;
+  height: auto;
+}
