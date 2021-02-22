@@ -41,7 +41,7 @@
 }
 
 .techs__item {
-  flex-basis: 90px;
+  flex: 0 0 90px;
   background-color: #303030;
   border-radius: 10px;
   padding: 21px 0 22px;
