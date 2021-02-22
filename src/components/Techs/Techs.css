@@ -34,6 +34,7 @@
 
 .techs__list {
   padding: 0;
+  margin: 0;
   list-style-type: none;
   display: flex;
   justify-content: center;
@@ -44,7 +45,6 @@
   flex: 0 0 90px;
   background-color: #303030;
   border-radius: 10px;
-  padding: 21px 0 22px;
 }
 
 .techs__item:not(:first-child) {
@@ -52,7 +52,17 @@
 }
 
 .techs__link {
+  display: block;
+  padding: 21px 0 22px;
   text-decoration: none;
   cursor: pointer;
   color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 121%;
+  transition: opacity 0.3s;
+}
+
+.techs__link:hover {
+  opacity: 0.7;
 }
