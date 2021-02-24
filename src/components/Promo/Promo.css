@@ -1,12 +1,16 @@
 .promo {
   background-color: #073042;
-  padding: 50px 0 60px;
+  padding: 50px 70px 60px;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
 }
 
 .promo__content {
   max-width: 1140px;
   margin: 0 auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .promo__title {
@@ -20,7 +24,39 @@
 
 .promo__img {
   display: block;
-  margin-left: auto;
+  align-self: flex-end;
   max-width: 100%;
+  min-width: 680px;
   height: auto;
+}
+
+@media screen and (max-width: 768px) {
+  .promo {
+    padding: 300px 44px 70px;
+  }
+
+  .promo__title {
+    text-align: center;
+  }
+
+  .promo__img {
+    align-self: auto;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .promo {
+    padding: 183px 0 40px;
+  }
+
+  .promo__title {
+    padding: 0 10px;
+    text-align: center;
+    font-size: 31px;
+    line-height: 126%;
+  }
+
+  .promo__img {
+    align-self: auto;
+  }
 }
