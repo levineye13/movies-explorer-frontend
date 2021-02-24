@@ -1,7 +1,7 @@
 .about-project {
   background-color: #202020;
   font-family: 'Inter', Arial, Helvetica, sans-serif;
-  padding: 110px 0;
+  padding: 110px 70px;
 }
 
 .about-project__content {
@@ -18,6 +18,10 @@
   flex-basis: 50%;
 }
 
+.about-project__info-item:not(:first-child) {
+  margin-left: 40px;
+}
+
 .about-project__info-title {
   color: #fff;
   margin: 0 0 26px;
@@ -28,7 +32,6 @@
 
 .about-project__info-description {
   color: #fff;
-  max-width: 500px;
   margin: 0;
   font-size: 14px;
   font-weight: 400;
@@ -40,9 +43,6 @@
   display: flex;
   width: 100%;
   text-align: center;
-}
-
-.about-project__timeline-item {
 }
 
 .about-project__timeline-item_type_back-end {
@@ -78,4 +78,61 @@
   font-size: 14px;
   font-weight: 400;
   line-height: 121%;
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+  }
+
+  .about-project__info-item:not(:first-child) {
+    margin-left: 30px;
+  }
+
+  .about-project__info-title {
+    margin-bottom: 22px;
+  }
+
+  .about-project__info-description {
+    font-size: 12px;
+    line-height: 150%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__info {
+    margin-top: 60px;
+    flex-direction: column;
+  }
+
+  .about-project__info-item:not(:first-child) {
+    margin: 56px 0 0;
+  }
+
+  .about-project__info-title {
+    margin-bottom: 16px;
+    font-size: 18px;
+    line-height: 122%;
+  }
+
+  .about-project__info-description {
+    font-size: 11px;
+    line-height: 145%;
+  }
+
+  .about-project__timeline-term {
+    padding: 11px 0;
+    font-size: 11px;
+    line-height: 118%;
+  }
+
+  .about-project__timeline-description {
+    margin-top: 10px;
+    font-size: 11px;
+    line-height: 118%;
+  }
 }
