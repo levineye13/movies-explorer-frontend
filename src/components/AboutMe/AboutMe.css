@@ -2,6 +2,7 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   background-color: #202020;
   padding: 110px 70px 50px;
+  overflow: hidden;
 }
 
 .about-me__content {
