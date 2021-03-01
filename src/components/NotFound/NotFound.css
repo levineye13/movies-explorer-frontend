@@ -3,11 +3,14 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   color: #fff;
   text-align: center;
+}
+
+.not-found__content {
+  position: relative;
 }
 
 .not-found__title {
@@ -26,11 +29,14 @@
 
 .not-found__back {
   display: block;
+  position: absolute;
+  bottom: -184px;
+  left: 50%;
+  transform: translateX(-50%);
   color: #4285f4;
   font-size: 14px;
   font-weight: 400;
   line-height: 121%;
-  margin-top: 184px;
   border: 0;
   outline: 0;
   padding: 0;
@@ -41,4 +47,23 @@
 
 .not-found__back:hover {
   opacity: 0.7;
+}
+
+@media screen and (max-width: 320px) {
+  .not-found__title {
+    font-size: 80px;
+    line-height: 1.21;
+  }
+
+  .not-found__subtitle {
+    margin-top: 10px;
+    font-size: 12px;
+    line-height: 1.25;
+  }
+
+  .not-found__back {
+    font-size: 12px;
+    line-height: 1.25;
+    bottom: -284px;
+  }
 }
