@@ -25,3 +25,13 @@ export const images = [
   img11,
   img12,
 ];
+
+export const checkDisplayComponent = (
+  allowPathList,
+  currentPath,
+  Component
+) => {
+  if (allowPathList.includes(currentPath)) {
+    return Component;
+  }
+};
