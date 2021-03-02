@@ -3,9 +3,12 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from './../../images/logo.svg';
 import Sidebar from './../Sidebar/Sidebar';
 import './Header.css';
+import { HEADER_TYPE } from '../../utils/constants';
+
+const { landing } = HEADER_TYPE;
 
 const Header = ({ headerType }) => {
-  const isLanding = headerType === 'landing' ? true : false;
+  const isLanding = headerType === landing ? true : false;
 
   const [isActiveMenu, setIsActiveMenu] = useState(false);
 
@@ -20,7 +23,7 @@ const Header = ({ headerType }) => {
   return (
     <header className={`header ${isLanding ? 'header_type_landing' : ''}`}>
       <div className="header__content">
-        <Link className="header__link-logo" to="/" target="_blank">
+        <Link className="header__link-logo" to="/">
           <img className="header__logo" src={logo} alt="Логотип" />
         </Link>
         <nav
