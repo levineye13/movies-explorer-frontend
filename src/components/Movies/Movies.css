@@ -1,0 +1,22 @@
+.movies {
+  background-color: #202020;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  padding: 0 70px;
+}
+
+.movies__search-form,
+.movies__movies-cardlist {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .movies {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .movies {
+    padding: 0 10px;
+  }
+}
