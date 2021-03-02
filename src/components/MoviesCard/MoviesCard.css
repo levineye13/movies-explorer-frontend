@@ -18,7 +18,7 @@
 }
 
 .card__title {
-  margin: 0;
+  margin: 0 14px 0 0;
   color: #fff;
   font-size: 15px;
   font-weight: 500;
@@ -35,6 +35,7 @@
 
 .card__img {
   display: block;
+  max-width: 100%;
   margin: 18px 0;
   object-fit: cover;
   object-position: center;
@@ -122,4 +123,44 @@
 }
 .card__save_type_delete::after {
   transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+@media screen and (max-width: 768px) {
+  .card__title {
+    margin-right: 12px;
+  }
+
+  .card__save::before {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    padding: 14px 0;
+  }
+
+  .card__description {
+    padding: 0 14px;
+  }
+
+  .card__title {
+    margin-right: 22px;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .card__title_saved,
+  .card__time_saved {
+    font-weight: 700;
+  }
+
+  .card__time {
+    font-size: 10px;
+    line-height: 1.8;
+  }
+
+  .card__img {
+    margin: 14px 0;
+  }
 }
