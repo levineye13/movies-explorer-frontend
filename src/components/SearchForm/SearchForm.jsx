@@ -6,7 +6,7 @@ const SearchForm = () => {
   return (
     <form
       action="#"
-      className="search-form movies__search-form"
+      className="search-form movies__search-form saved-movies__search-form"
       name="searchForm"
       noValidate
     >
