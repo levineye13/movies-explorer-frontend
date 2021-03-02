@@ -87,6 +87,10 @@
   align-items: center;
 }
 
+.sidebar__item {
+  display: block;
+}
+
 .sidebar__item:not(:first-child) {
   margin-top: 28px;
 }
