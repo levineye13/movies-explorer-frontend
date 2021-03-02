@@ -58,7 +58,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             </li>
           </ul>
         </nav>
-        <Link to={profile} className="sidebar__account">
+        <Link to={profile} className="sidebar__account" onClick={onClose}>
           Аккаунт
         </Link>
       </div>
