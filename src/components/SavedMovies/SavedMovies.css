@@ -4,9 +4,12 @@
   padding: 0 70px;
 }
 
-.saved-movies__search-form,
-.saved-movies__movies-cardlist {
+.saved-movies__search-form {
   margin: 0 auto;
+}
+
+.saved-movies__movies-cardlist {
+  margin: 70px auto 90px;
 }
 
 @media screen and (max-width: 768px) {

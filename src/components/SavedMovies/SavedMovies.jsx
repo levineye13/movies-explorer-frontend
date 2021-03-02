@@ -8,7 +8,7 @@ const SavedMovies = () => {
   return (
     <section className="saved-movies page__saved-movies">
       <SearchForm />
-      <MoviesCardList isSaved={true} movies={images.slice(0, 3)} />
+      <MoviesCardList isSaved={true} movieList={images.slice(0, 3)} />
     </section>
   );
 };
