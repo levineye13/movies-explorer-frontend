@@ -1,0 +1,22 @@
+.saved-movies {
+  background-color: #202020;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  padding: 0 70px;
+}
+
+.saved-movies__search-form,
+.saved-movies__movies-cardlist {
+  margin: 0 auto;
+}
+
+@media screen and (max-width: 768px) {
+  .saved-movies {
+    padding: 0 30px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .saved-movies {
+    padding: 0 10px;
+  }
+}
