@@ -2,6 +2,9 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   background-color: #202020;
   padding: 74px 0 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .profile__title {
@@ -16,7 +19,7 @@
 .profile__form {
   margin: 123px auto 0;
   display: flex;
-  max-width: 410px;
+  width: 410px;
   flex-direction: column;
   align-items: center;
 }

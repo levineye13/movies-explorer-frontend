@@ -3,7 +3,7 @@ import './Profile.css';
 
 const Profile = () => {
   return (
-    <section className="profile">
+    <section className="profile page__profile">
       <h1 className="profile__title">Привет, Олег!</h1>
       <form action="#" className="profile__form" name="profileForm" noValidate>
         <fieldset className="profile__user-info">
