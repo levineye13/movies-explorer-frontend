@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import './Login.css';
 import AuthenticationSection from '../AuthenticationSection/AuthenticationSection';
 import InputElement from '../InputElement/InputElement';
 
