@@ -2,11 +2,12 @@
   font-family: 'Inter', Arial, Helvetica, sans-serif;
   background-color: #202020;
   padding: 70px 0;
+  display: flex;
 }
 
 .authentication__content {
-  max-width: 396px;
-  margin: 0 auto;
+  width: 396px;
+  margin: auto;
 }
 
 .authentication__logo {
