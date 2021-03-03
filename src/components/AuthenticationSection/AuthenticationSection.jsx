@@ -19,6 +19,10 @@ const AuthenticationSection = ({
     }
   };
 
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+  };
+
   return (
     <section className="authentication page__authentication">
       <div className="authentication__content">
@@ -31,7 +35,11 @@ const AuthenticationSection = ({
           noValidate
         >
           <fieldset className="authentication__user-input">{children}</fieldset>
-          <button className="authentication__submit" type="submit">
+          <button
+            className="authentication__submit"
+            type="submit"
+            onClick={handleSubmit}
+          >
             {textButton}
           </button>
         </form>

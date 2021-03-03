@@ -34,6 +34,7 @@
 }
 
 .profile__field {
+  box-sizing: border-box;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
@@ -42,11 +43,18 @@
   font-weight: 500;
   line-height: 1.18;
   color: #fff;
+  padding-bottom: 16px;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
 }
 
 .profile__field:not(:last-child) {
-  border-bottom: 1px solid #424242;
+  border-bottom-color: #424242;
   margin-bottom: 17px;
+}
+
+.profile__field:focus-within {
+  border-bottom-color: #eee;
 }
 
 .profile__input,
@@ -60,7 +68,6 @@
 }
 
 .profile__input {
-  padding-bottom: 16px;
   flex-grow: 1;
   max-width: 85%;
   text-align: right;

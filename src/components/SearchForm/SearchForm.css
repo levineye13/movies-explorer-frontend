@@ -3,6 +3,9 @@
   background-color: #202020;
   max-width: 1140px;
   padding: 70px 0 49px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .search-form__label {
@@ -10,6 +13,11 @@
   display: flex;
   padding-bottom: 15px;
   border-bottom: 1px solid #424242;
+  transition: border-bottom-color 0.2s;
+}
+
+.search-form__label:focus-within {
+  border-bottom-color: #eee;
 }
 
 .search-form__search-img {
