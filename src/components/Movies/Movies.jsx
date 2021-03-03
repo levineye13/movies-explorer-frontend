@@ -4,13 +4,20 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import ButtonAddMovies from '../ButtonAddMovies/ButtonAddMovies';
 import './Movies.css';
 import { images } from '../../utils/utils';
+import Preloader from '../Preloader/Preloader';
 
 const Movies = () => {
   return (
     <section className="movies page__movies">
       <SearchForm />
-      <MoviesCardList isSaved={false} movieList={images} />
-      <ButtonAddMovies isVisible={true} />
+      {images && images.length > 0 ? (
+        <>
+          <MoviesCardList isSaved={false} movieList={images} />
+          <ButtonAddMovies isVisible={true} />
+        </>
+      ) : (
+        <Preloader />
+      )}
     </section>
   );
 };
