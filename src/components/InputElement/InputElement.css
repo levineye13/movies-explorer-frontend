@@ -1,0 +1,49 @@
+.form-field {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.form-field:not(:last-child) {
+  margin-bottom: 50px;
+}
+
+.form-field__title,
+.form-field__error {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.form-field__title {
+  color: #8b8b8b;
+}
+
+.form-field__input {
+  display: block;
+  margin: 10px 0 0;
+  padding: 15px;
+  border: 1px solid transparent;
+  outline: 0;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.23;
+  font-family: inherit;
+  background-color: #2f2f2f;
+  border-radius: 8px;
+  transition: border-color 0.2s;
+}
+
+.form-field__input:focus {
+  border-color: #eee;
+}
+
+.form-field__error {
+  color: #ee3465;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 10px);
+}

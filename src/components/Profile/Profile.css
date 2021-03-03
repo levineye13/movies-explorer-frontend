@@ -1,0 +1,127 @@
+.profile {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  background-color: #202020;
+  padding: 74px 0 70px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile__title {
+  margin: 0;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.21;
+  text-align: center;
+}
+
+.profile__form {
+  margin: 123px auto 0;
+  display: flex;
+  width: 410px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile__user-info {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile__field {
+  box-sizing: border-box;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.18;
+  color: #fff;
+  padding-bottom: 16px;
+  border-bottom: 1px solid transparent;
+  transition: border-bottom-color 0.2s;
+}
+
+.profile__field:not(:last-child) {
+  border-bottom-color: #424242;
+  margin-bottom: 17px;
+}
+
+.profile__field:focus-within {
+  border-bottom-color: #eee;
+}
+
+.profile__input,
+.profile__edit,
+.profile__logout {
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  color: #fff;
+}
+
+.profile__input {
+  flex-grow: 1;
+  max-width: 85%;
+  text-align: right;
+  font-family: inherit;
+  font-weight: 400;
+}
+
+.profile__edit,
+.profile__logout {
+  cursor: pointer;
+  transition: opacity 0.3s;
+  font-size: 13px;
+  line-height: 1.23;
+}
+
+.profile__edit {
+  margin: 220px 0 0;
+  font-weight: 400;
+}
+
+.profile__logout {
+  margin: 16px 0 0;
+  color: #ee3465;
+  font-weight: 500;
+}
+
+.profile__edit:hover,
+.profile__logout:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 768px) {
+  .profile__form {
+    margin-top: 96px;
+  }
+
+  .profile__edit {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .profile__form {
+    margin-top: 80px;
+    width: 260px;
+  }
+
+  .profile__edit {
+    margin-top: 379px;
+  }
+
+  .profile__edit,
+  .profile__logout {
+    font-size: 12px;
+    line-height: 1.25;
+  }
+}
