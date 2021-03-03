@@ -22,3 +22,18 @@ export const HEADER_TYPE = {
 export const HEADER_DISPLAY = [root, movies, saved, profile];
 
 export const FOOTER_DISPLAY = [root, movies, saved];
+
+export const SOCIAL = {
+  facebook: {
+    name: 'Facebook',
+    link: 'https://www.facebook.com/profile.php?id=100008427819375',
+  },
+  github: {
+    name: 'GitHub',
+    link: 'https://github.com/levineye13',
+  },
+  yandexPraktikum: {
+    name: 'Яндекс.Практикум',
+    link: 'https://praktikum.yandex.ru',
+  },
+};

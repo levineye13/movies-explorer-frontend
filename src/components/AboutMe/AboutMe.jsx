@@ -2,6 +2,9 @@ import React from 'react';
 import SectionTitle from './../SectionTitle/SectionTitle';
 import './AboutMe.css';
 import avatar from './../../images/about-me-avatar.jpg';
+import { SOCIAL } from '../../utils/constants';
+
+const { facebook, github } = SOCIAL;
 
 const AboutMe = () => {
   return (
@@ -19,20 +22,20 @@ const AboutMe = () => {
               <ul className="about-me__social-list">
                 <li className="about-me__social-item">
                   <a
-                    href="https://www.facebook.com"
+                    href={facebook.link}
                     className="about-me__social-link"
                     target="_blank"
                   >
-                    Facebook
+                    {facebook.name}
                   </a>
                 </li>
                 <li className="about-me__social-item">
                   <a
-                    href="https://github.com/levineye13"
+                    href={github.link}
                     className="about-me__social-link"
                     target="_blank"
                   >
-                    Github
+                    {github.name}
                   </a>
                 </li>
               </ul>

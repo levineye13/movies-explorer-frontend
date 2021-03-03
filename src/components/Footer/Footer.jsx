@@ -1,5 +1,8 @@
 import React from 'react';
 import './Footer.css';
+import { SOCIAL } from '../../utils/constants';
+
+const { yandexPraktikum, github, facebook } = SOCIAL;
 
 const Footer = () => {
   return (
@@ -13,29 +16,21 @@ const Footer = () => {
           <ul className="footer__list">
             <li className="footer__item">
               <a
-                href="https://praktikum.yandex.ru"
+                href={yandexPraktikum.link}
                 className="footer__link"
                 target="_blank"
               >
-                Яндекс.Практикум
+                {yandexPraktikum.name}
               </a>
             </li>
             <li className="footer__item">
-              <a
-                href="https://github.com/levineye13"
-                className="footer__link"
-                target="_blank"
-              >
-                Github
+              <a href={github.link} className="footer__link" target="_blank">
+                {github.name}
               </a>
             </li>
             <li className="footer__item">
-              <a
-                href="https://www.facebook.com"
-                className="footer__link"
-                target="_blank"
-              >
-                Facebook
+              <a href={facebook.link} className="footer__link" target="_blank">
+                {facebook.name}
               </a>
             </li>
           </ul>

@@ -86,7 +86,7 @@
   margin-left: 10px;
 }
 
-.header__link-auth_active {
+.header__link-auth_type_signin {
   color: #000;
   background-color: #3ddc84;
 }

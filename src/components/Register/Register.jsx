@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
 import AuthenticationSection from '../AuthenticationSection/AuthenticationSection';
 import InputElement from '../InputElement/InputElement';
+import { PATHNAME } from '../../utils/constants';
+
+const { signin } = PATHNAME;
 
 const Register = () => {
   const firstInputRef = useRef();
@@ -24,7 +27,7 @@ const Register = () => {
       children={registerChildren}
       textButton="Зарегистрироваться"
       question="Уже зарегистрированы?"
-      pathname="/signin"
+      pathname={signin}
       textLink="Войти"
       inputRef={firstInputRef}
     />

@@ -3,9 +3,10 @@ import { Link, NavLink } from 'react-router-dom';
 import logo from './../../images/logo.svg';
 import Sidebar from './../Sidebar/Sidebar';
 import './Header.css';
-import { HEADER_TYPE } from '../../utils/constants';
+import { HEADER_TYPE, PATHNAME } from '../../utils/constants';
 
 const { landing } = HEADER_TYPE;
+const { root, movies, saved, signin, signup, profile } = PATHNAME;
 
 const Header = ({ headerType }) => {
   const isLanding = headerType === landing ? true : false;
@@ -23,7 +24,7 @@ const Header = ({ headerType }) => {
   return (
     <header className={`header ${isLanding ? 'header_type_landing' : ''}`}>
       <div className="header__content">
-        <Link className="header__link-logo" to="/">
+        <Link className="header__link-logo" to={root}>
           <img className="header__logo" src={logo} alt="Логотип" />
         </Link>
         <nav
@@ -33,14 +34,14 @@ const Header = ({ headerType }) => {
         >
           <NavLink
             exact
-            to="/movies"
+            to={movies}
             className="header__link"
             activeClassName="header__link_active"
           >
             Фильмы
           </NavLink>
           <NavLink
-            to="/saved-movies"
+            to={saved}
             className="header__link"
             activeClassName="header__link_active"
           >
@@ -49,26 +50,19 @@ const Header = ({ headerType }) => {
         </nav>
         {isLanding ? (
           <nav className="header__menu-auth">
-            <NavLink
-              to="/signup"
-              className="header__link-auth"
-              activeClassName="header__link-auth_active"
-            >
+            <Link to={signup} className="header__link-auth">
               Регистрация
-            </NavLink>
-            <NavLink
-              to="/signin"
-              className={`header__link-auth ${
-                isLanding ? 'header__link-auth_active' : ''
-              }`}
-              activeClassName="header__link-auth_active"
+            </Link>
+            <Link
+              to={signin}
+              className="header__link-auth header__link-auth_type_signin"
             >
               Войти
-            </NavLink>
+            </Link>
           </nav>
         ) : (
           <>
-            <Link to="/profile" className="header__account">
+            <Link to={profile} className="header__account">
               Аккаунт
             </Link>
             <button
