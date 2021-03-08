@@ -1,9 +1,25 @@
+export const MAIN_API_BASE_URL =
+  'https://api.movies-explorer.students.nomoreparties.xyz';
+
+export const MOVIES_API_BASE_URL = 'https://api.nomoreparties.co';
+
+export const HTTP_METHODS = {
+  HEAD: 'HEAD',
+  GET: 'GET',
+  POST: 'POST',
+  DELETE: 'DELETE',
+  PUT: 'PUT',
+  PATCH: 'PATCH',
+};
+
 const root = '/';
 const movies = '/movies';
 const saved = '/saved-movies';
 const profile = '/profile';
 const signin = '/signin';
 const signup = '/signup';
+const signout = '/signout';
+const me = '/users/me';
 
 export const PATHNAME = {
   root,
@@ -12,6 +28,8 @@ export const PATHNAME = {
   profile,
   signin,
   signup,
+  signout,
+  me,
 };
 
 export const HEADER_TYPE = {
