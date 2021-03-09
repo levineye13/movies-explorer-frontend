@@ -52,6 +52,13 @@
   transition: opacity 0.3s, border-color 0.2s;
 }
 
+.authentication__submit:disabled,
+.authentication__submit:disabled:hover {
+  opacity: 1;
+  background-color: #f8f8f8;
+  color: #c2c2c2;
+}
+
 .authentication__submit:focus {
   border-color: #eee;
 }

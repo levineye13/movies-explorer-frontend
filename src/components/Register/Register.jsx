@@ -2,11 +2,18 @@ import React, { useRef } from 'react';
 import AuthenticationSection from '../AuthenticationSection/AuthenticationSection';
 import InputElement from '../InputElement/InputElement';
 import { PATHNAME } from '../../utils/constants';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 const { signin } = PATHNAME;
 
 const Register = () => {
   const firstInputRef = useRef();
+  const {
+    values,
+    errors,
+    isValidForm,
+    handleInputChange,
+  } = useFormWithValidation();
 
   const registerChildren = (
     <>
@@ -15,9 +22,26 @@ const Register = () => {
         type="text"
         name="nameInput"
         inputRef={firstInputRef}
+        value={values.nameInput}
+        error={errors.nameInput}
+        onChange={handleInputChange}
       />
-      <InputElement inputTitle="E-mail" type="email" name="emailInput" />
-      <InputElement inputTitle="Пароль" type="password" name="passwordInput" />
+      <InputElement
+        inputTitle="E-mail"
+        type="email"
+        name="emailInput"
+        value={values.emailInput}
+        error={errors.emailInput}
+        onChange={handleInputChange}
+      />
+      <InputElement
+        inputTitle="Пароль"
+        type="password"
+        name="passwordInput"
+        value={values.passwordInput}
+        error={errors.passwordInput}
+        onChange={handleInputChange}
+      />
     </>
   );
 
@@ -30,6 +54,7 @@ const Register = () => {
       pathname={signin}
       textLink="Войти"
       inputRef={firstInputRef}
+      isValidForm={isValidForm}
     />
   );
 };

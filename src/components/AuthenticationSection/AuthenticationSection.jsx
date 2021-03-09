@@ -11,6 +11,7 @@ const AuthenticationSection = ({
   pathname,
   textLink,
   inputRef,
+  isValidForm,
 }) => {
   const handleFocus = (evt) => {
     if (evt.key === 'Tab') {
@@ -26,7 +27,7 @@ const AuthenticationSection = ({
   return (
     <section className="authentication page__authentication">
       <div className="authentication__content">
-        <img src={logo} alt="" className="authentication__logo" alt="Логотип" />
+        <img src={logo} className="authentication__logo" alt="Логотип" />
         <h1 className="authentication__title">{title}</h1>
         <form
           action="#"
@@ -39,6 +40,7 @@ const AuthenticationSection = ({
             className="authentication__submit"
             type="submit"
             onClick={handleSubmit}
+            disabled={!isValidForm}
           >
             {textButton}
           </button>
