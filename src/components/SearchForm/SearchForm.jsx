@@ -1,8 +1,11 @@
 import React from 'react';
 import FilterCheckbox from './../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 const SearchForm = ({ onSubmit }) => {
+  const { values, isValidForm, handleInputChange } = useFormWithValidation();
+
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     await onSubmit();
@@ -24,8 +27,14 @@ const SearchForm = ({ onSubmit }) => {
           name="movieInput"
           placeholder="Фильм"
           required
+          onChange={handleInputChange}
+          value={values.movieInput || ''}
         />
-        <button className="search-form__submit" type="submit" />
+        <button
+          className="search-form__submit"
+          type="submit"
+          disabled={!isValidForm}
+        />
       </label>
       <FilterCheckbox />
     </form>
