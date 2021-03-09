@@ -88,6 +88,10 @@
   font-weight: 400;
 }
 
+.profile__edit:disabled {
+  opacity: 0.3;
+}
+
 .profile__logout {
   margin: 16px 0 0;
   color: #ee3465;
