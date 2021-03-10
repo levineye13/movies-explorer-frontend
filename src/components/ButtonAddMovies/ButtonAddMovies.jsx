@@ -1,13 +1,12 @@
 import React from 'react';
 import './ButtonAddMovies.css';
 
-const ButtonAddMovies = ({ isVisible = false }) => {
+const ButtonAddMovies = ({ addCards }) => {
   return (
     <button
-      className={`button-add-movies ${
-        isVisible ? 'button-add-movies_visible' : ''
-      } movies__button-add-movies `}
+      className="button-add-movies movies__button-add-movies"
       type="button"
+      onClick={addCards}
     >
       Ещё
     </button>
