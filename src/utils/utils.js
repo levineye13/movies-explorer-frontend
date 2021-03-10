@@ -1,5 +1,7 @@
 'use strict';
 
+import humanizeDuration from 'humanize-duration';
+
 import { DISPLAY_RESOLUTION } from './constants';
 
 const { smallScreen, mediumScreen } = DISPLAY_RESOLUTION;
@@ -55,3 +57,10 @@ export const determineNumberOfCards = (screenWidth) => {
       };
   }
 };
+
+export const setTimeFormat = (minutes) =>
+  humanizeDuration(minutes * 60000, {
+    language: 'ru',
+    delimiter: ' ',
+    spacer: ' ',
+  });

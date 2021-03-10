@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './MoviesCard.css';
+import { setTimeFormat } from '../../utils/utils';
 
 const MoviesCard = ({
   isSavedCard = false,
@@ -29,7 +30,7 @@ const MoviesCard = ({
             <p
               className={`card__time ${isSavedCard ? 'card__time_saved' : ''}`}
             >
-              {time}
+              {setTimeFormat(time)}
             </p>
           </figcaption>
           <img src={img} alt={`Фильм: "${title}"`} className="card__img" />
