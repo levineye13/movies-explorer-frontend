@@ -55,3 +55,14 @@ export const SOCIAL = {
     link: 'https://praktikum.yandex.ru',
   },
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  movies: 'movies',
+  user: 'user',
+};
+
+export const DISPLAY_RESOLUTION = {
+  smallScreen: 480,
+  mediumScreen: 768,
+  largeScreen: 1280,
+};
