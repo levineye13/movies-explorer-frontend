@@ -8,7 +8,7 @@ const Profile = () => {
   const handleSubmit = (evt) => {
     evt.preventDefault();
   };
-  console.log(isValidForm);
+
   return (
     <section className="profile page__profile">
       <h1 className="profile__title">Привет, Олег!</h1>
