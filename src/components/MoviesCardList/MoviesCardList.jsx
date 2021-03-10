@@ -41,7 +41,7 @@ const MoviesCardList = ({ isSaved, movieList }) => {
                 title={nameRU || ''}
                 time={duration || ''}
                 img={`${MOVIES_API_BASE_URL}${url || ''}`}
-                trailerLink={trailerLink}
+                trailerLink={trailerLink || ''}
               />
             </li>
           );
