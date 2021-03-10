@@ -1,5 +1,9 @@
 'use strict';
 
+import { DISPLAY_RESOLUTION } from './constants';
+
+const { smallScreen, mediumScreen } = DISPLAY_RESOLUTION;
+
 export const checkDisplayComponent = (
   allowPathList,
   currentPath,
@@ -26,4 +30,28 @@ export const createObjectFromKeys = (obj, keysList) => {
 
     return obj.hasOwnProperty(key) ? { ...acc, [key]: obj[key] } : acc;
   }, {});
+};
+
+export const getScreenWidth = () => window.screen.width;
+
+export const determineNumberOfCards = (screenWidth) => {
+  switch (true) {
+    case screenWidth > mediumScreen:
+      return {
+        base: 12,
+        add: 3,
+      };
+
+    case screenWidth <= mediumScreen && screenWidth > smallScreen:
+      return {
+        base: 8,
+        add: 2,
+      };
+
+    case screenWidth <= smallScreen:
+      return {
+        base: 5,
+        add: 1,
+      };
+  }
 };
