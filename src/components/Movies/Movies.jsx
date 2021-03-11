@@ -50,15 +50,14 @@ const Movies = () => {
   }, []);
 
   useEffect(() => {
+    let timerId = null;
+
     const updateWindowWidth = () => {
-      setDeviceWidth(getScreenWidth());
+      clearTimeout(timerId);
+      timerId = setTimeout(() => setDeviceWidth(getScreenWidth()), 1000);
     };
 
-    window.addEventListener('resize', () => {
-      setTimeout(() => {
-        updateWindowWidth();
-      }, 1000);
-    });
+    window.addEventListener('resize', updateWindowWidth);
 
     return () => window.removeEventListener('resize', updateWindowWidth);
   }, []);
