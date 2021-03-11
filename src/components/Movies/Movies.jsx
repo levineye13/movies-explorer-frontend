@@ -13,6 +13,8 @@ const { movies: moviesKey } = LOCAL_STORAGE_KEYS;
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
+  const [shortMovies, setShortMovies] = useState([]);
+  const [isShorted, setIsShorted] = useState(false);
   const [isActivePreloader, setIsActivePreloader] = useState(false);
   const [deviceWidth, setDeviceWidth] = useState(0);
   const [lastCardIndex, setLastCardIndex] = useState(0);
@@ -37,6 +39,15 @@ const Movies = () => {
       console.error(err);
     }
   };
+
+  const filterShortMovie = () => {
+    setIsShorted(!isShorted);
+  };
+
+  useEffect(() => {
+    const shortMovies = movies.filter((movie) => movie.duration <= 40);
+    setShortMovies(shortMovies);
+  }, [movies]);
 
   useEffect(() => {
     const dataMovies = localStorage.getItem(moviesKey);
@@ -70,15 +81,17 @@ const Movies = () => {
 
   return (
     <section className="movies page__movies">
-      <SearchForm onSubmit={handleSubmit} />
+      <SearchForm onSubmit={handleSubmit} filter={filterShortMovie} />
       <Preloader isActive={isActivePreloader} />
       {movies.length > 0 && (
         <>
           <MoviesCardList
             isSaved={false}
-            movieList={movies.slice(0, lastCardIndex)}
+            movieList={
+              !isShorted ? movies.slice(0, lastCardIndex) : shortMovies
+            }
           />
-          {movies.length > 3 && movies[lastCardIndex] && (
+          {movies.length > 3 && movies[lastCardIndex] && !isShorted && (
             <ButtonAddMovies addCards={addCards} />
           )}
         </>

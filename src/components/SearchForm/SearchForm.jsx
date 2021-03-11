@@ -3,7 +3,7 @@ import FilterCheckbox from './../FilterCheckbox/FilterCheckbox';
 import './SearchForm.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-const SearchForm = ({ onSubmit }) => {
+const SearchForm = ({ onSubmit, filter }) => {
   const { values, isValidForm, handleInputChange } = useFormWithValidation();
 
   const handleSubmit = async (evt) => {
@@ -36,7 +36,7 @@ const SearchForm = ({ onSubmit }) => {
           disabled={!isValidForm}
         />
       </label>
-      <FilterCheckbox />
+      <FilterCheckbox filterFunction={filter} />
     </form>
   );
 };
