@@ -58,7 +58,25 @@ export const determineNumberOfCards = (screenWidth) => {
 
 export const setTimeFormat = (minutes) => {
   const hours = (minutes / 60).toString()[0];
-  minutes = (minutes % 60).toString();
+  minutes %= 60;
 
   return +hours === 0 ? `${minutes} минут` : `${hours}ч ${minutes}мин`;
 };
+
+export const filterByKeyword = (collection, propertyList, keyword) =>
+  collection.filter((item) =>
+    propertyList.find((property) => {
+      if (
+        item[property] &&
+        item[property]
+          .trim()
+          .toLowerCase()
+          .includes(keyword.trim().toLowerCase())
+      ) {
+        return item[property];
+      }
+    })
+  );
+
+export const filterShortMovies = (collection) =>
+  collection.filter((item) => item.duration <= 40);

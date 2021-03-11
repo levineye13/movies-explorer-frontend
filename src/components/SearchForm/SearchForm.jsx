@@ -8,7 +8,7 @@ const SearchForm = ({ onSubmit, filter }) => {
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await onSubmit();
+    await onSubmit({ keyword: values.movieInput });
   };
 
   return (

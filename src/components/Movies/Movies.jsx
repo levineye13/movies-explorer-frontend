@@ -7,7 +7,12 @@ import Preloader from '../Preloader/Preloader';
 import moviesApi from '../../utils/Api/MoviesApi';
 import './Movies.css';
 
-import { getScreenWidth, determineNumberOfCards } from '../../utils/utils';
+import {
+  getScreenWidth,
+  determineNumberOfCards,
+  filterByKeyword,
+  filterShortMovies,
+} from '../../utils/utils';
 import { LOCAL_STORAGE_KEYS } from '../../utils/constants';
 const { movies: moviesKey } = LOCAL_STORAGE_KEYS;
 
@@ -19,11 +24,16 @@ const Movies = () => {
   const [deviceWidth, setDeviceWidth] = useState(0);
   const [lastCardIndex, setLastCardIndex] = useState(0);
 
+  const setDataMovies = (moviesData) => {
+    localStorage.setItem(moviesKey, JSON.stringify(moviesData));
+    setMovies(moviesData);
+  };
+
   const addCards = () => {
     setLastCardIndex(lastCardIndex + determineNumberOfCards(deviceWidth).add);
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async ({ keyword }) => {
     setIsActivePreloader(true);
     try {
       const res = await moviesApi.getMovies();
@@ -31,8 +41,10 @@ const Movies = () => {
       if (res) {
         localStorage.removeItem(moviesKey);
         setLastCardIndex(determineNumberOfCards(deviceWidth).base);
-        setMovies(res);
-        localStorage.setItem(moviesKey, JSON.stringify(res));
+        const filtered = filterByKeyword(res, ['nameRU', 'nameEN'], keyword);
+        if (filtered.length > 0) {
+          setDataMovies(filtered);
+        }
         setIsActivePreloader(false);
       }
     } catch (err) {
@@ -40,13 +52,12 @@ const Movies = () => {
     }
   };
 
-  const filterShortMovie = () => {
+  const toggleShortMovies = () => {
     setIsShorted(!isShorted);
   };
 
   useEffect(() => {
-    const shortMovies = movies.filter((movie) => movie.duration <= 40);
-    setShortMovies(shortMovies);
+    setShortMovies(filterShortMovies(movies));
   }, [movies]);
 
   useEffect(() => {
@@ -81,7 +92,7 @@ const Movies = () => {
 
   return (
     <section className="movies page__movies">
-      <SearchForm onSubmit={handleSubmit} filter={filterShortMovie} />
+      <SearchForm onSubmit={handleSubmit} filter={toggleShortMovies} />
       <Preloader isActive={isActivePreloader} />
       {movies.length > 0 && (
         <>
