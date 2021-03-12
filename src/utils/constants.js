@@ -68,3 +68,23 @@ export const DISPLAY_RESOLUTION = {
   mediumScreen: 768,
   largeScreen: 1280,
 };
+
+export const HTTP_ERRORS = {
+  serverError: {
+    status: 500,
+    message: 'На сервере произошла ошибка.',
+  },
+  badRequestError: {
+    status: 400,
+    message:
+      'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
+  },
+  notFoundError: {
+    status: 404,
+    message: 'Страница не найдена.',
+  },
+  conflictError: {
+    status: 409,
+    message: 'Пользователь с таким email уже существует.',
+  },
+};
