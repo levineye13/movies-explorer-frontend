@@ -6,7 +6,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 const { signin } = PATHNAME;
 
-const Register = () => {
+const Register = ({ onRegistration }) => {
   const firstInputRef = useRef();
   const {
     values,
@@ -15,12 +15,20 @@ const Register = () => {
     handleInputChange,
   } = useFormWithValidation();
 
+  const handleRegistration = async () => {
+    await onRegistration({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
+  };
+
   const registerChildren = (
     <>
       <InputElement
         inputTitle="Имя"
         type="text"
-        name="nameInput"
+        name="name"
         inputRef={firstInputRef}
         value={values.nameInput}
         error={errors.nameInput}
@@ -29,7 +37,7 @@ const Register = () => {
       <InputElement
         inputTitle="E-mail"
         type="email"
-        name="emailInput"
+        name="email"
         value={values.emailInput}
         error={errors.emailInput}
         onChange={handleInputChange}
@@ -37,7 +45,7 @@ const Register = () => {
       <InputElement
         inputTitle="Пароль"
         type="password"
-        name="passwordInput"
+        name="password"
         value={values.passwordInput}
         error={errors.passwordInput}
         onChange={handleInputChange}
@@ -55,6 +63,7 @@ const Register = () => {
       textLink="Войти"
       inputRef={firstInputRef}
       isValidForm={isValidForm}
+      onSubmit={handleRegistration}
     />
   );
 };

@@ -2,11 +2,15 @@ import React from 'react';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
-const Profile = () => {
+const Profile = ({ onUpdateUser }) => {
   const { values, isValidForm, handleInputChange } = useFormWithValidation();
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
+    await onUpdateUser({
+      name: values.name,
+      email: values.email,
+    });
   };
 
   return (
@@ -25,7 +29,7 @@ const Profile = () => {
             <input
               type="text"
               className="profile__input"
-              name="nameInput"
+              name="name"
               required
               onChange={handleInputChange}
               value={values.nameInput || ''}
@@ -36,7 +40,7 @@ const Profile = () => {
             <input
               type="email"
               className="profile__input"
-              name="emailInput"
+              name="email"
               required
               onChange={handleInputChange}
               value={values.emailInput || ''}
