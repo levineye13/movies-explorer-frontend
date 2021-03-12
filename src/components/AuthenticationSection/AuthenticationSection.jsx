@@ -12,6 +12,7 @@ const AuthenticationSection = ({
   textLink,
   inputRef,
   isValidForm,
+  onSubmit,
 }) => {
   const handleFocus = (evt) => {
     if (evt.key === 'Tab') {
@@ -20,8 +21,9 @@ const AuthenticationSection = ({
     }
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
+    await onSubmit();
   };
 
   return (
@@ -34,12 +36,12 @@ const AuthenticationSection = ({
           className="authentication__form"
           name="authForm"
           noValidate
+          onSubmit={handleSubmit}
         >
           <fieldset className="authentication__user-input">{children}</fieldset>
           <button
             className="authentication__submit"
             type="submit"
-            onClick={handleSubmit}
             disabled={!isValidForm}
           >
             {textButton}

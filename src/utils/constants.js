@@ -1,3 +1,5 @@
+export const patternName = '[A-Za-zА-Яа-яЁё -]{2,30}';
+
 export const MAIN_API_BASE_URL =
   'https://api.movies-explorer.students.nomoreparties.xyz';
 

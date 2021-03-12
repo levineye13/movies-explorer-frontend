@@ -9,6 +9,9 @@ const InputElement = ({
   value,
   error,
   onChange,
+  pattern,
+  minLength,
+  maxLength,
 }) => {
   return (
     <label className="form-field">
@@ -21,6 +24,9 @@ const InputElement = ({
         required
         onChange={onChange}
         ref={inputRef}
+        pattern={pattern}
+        minLength={minLength}
+        maxLength={maxLength}
       />
       <span className="form-field__error">{error || ''}</span>
     </label>

@@ -1,6 +1,7 @@
 import React from 'react';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
+import { patternName } from '../../utils/constants';
 
 const Profile = ({ onUpdateUser }) => {
   const { values, isValidForm, handleInputChange } = useFormWithValidation();
@@ -32,7 +33,8 @@ const Profile = ({ onUpdateUser }) => {
               name="name"
               required
               onChange={handleInputChange}
-              value={values.nameInput || ''}
+              value={values.name || ''}
+              pattern={patternName}
             />
           </label>
           <label className="profile__field">
@@ -43,7 +45,7 @@ const Profile = ({ onUpdateUser }) => {
               name="email"
               required
               onChange={handleInputChange}
-              value={values.emailInput || ''}
+              value={values.email || ''}
             />
           </label>
         </fieldset>

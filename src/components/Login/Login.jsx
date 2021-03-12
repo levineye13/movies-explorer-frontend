@@ -29,17 +29,18 @@ const Login = ({ onAuthorization }) => {
         type="email"
         name="email"
         inputRef={firstInputRef}
-        value={values.emailInput}
-        error={errors.emailInput}
+        value={values.email}
+        error={errors.email}
         onChange={handleInputChange}
       />
       <InputElement
         inputTitle="Пароль"
         type="password"
         name="password"
-        value={values.passwordInput}
-        error={errors.passwordInput}
+        value={values.password}
+        error={errors.password}
         onChange={handleInputChange}
+        minLength="8"
       />
     </>
   );
