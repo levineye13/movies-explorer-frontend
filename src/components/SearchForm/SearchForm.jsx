@@ -4,11 +4,17 @@ import './SearchForm.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 const SearchForm = ({ onSubmit, filter }) => {
-  const { values, isValidForm, handleInputChange } = useFormWithValidation();
+  const {
+    values,
+    isValidForm,
+    handleInputChange,
+    resetForm,
+  } = useFormWithValidation();
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
-    await onSubmit({ keyword: values.movieInput });
+    await onSubmit(values.movieInput);
+    resetForm();
   };
 
   return (
