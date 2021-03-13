@@ -1,18 +1,60 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 import { setTimeFormat } from '../../utils/utils';
+import { PATHNAME } from '../../utils/constants';
+
+const { movies, saved } = PATHNAME;
 
 const MoviesCard = ({
+  id,
   isSavedCard = false,
-  title = '',
-  time = '',
-  img = '',
-  trailerLink = '',
+  nameRU,
+  nameEN,
+  duration,
+  image,
+  trailerLink,
+  country,
+  director,
+  year,
+  description,
+  thumbnail,
+  onDeleteMovie,
+  onSaveMovie,
 }) => {
+  const { pathname } = useLocation();
   const [isSaved, setIsSaved] = useState(isSavedCard);
 
-  const toggleStateCard = () => {
+  const toggleStateCard = async (evt) => {
+    evt.preventDefault();
     setIsSaved(!isSaved);
+    if (isSaved) {
+      await onDeleteMovie({ id });
+    } else {
+      await onSaveMovie({
+        country,
+        director,
+        duration,
+        year,
+        description,
+        image,
+        trailer: trailerLink,
+        thumbnail,
+        movieId: id,
+        nameRU,
+        nameEN,
+      });
+    }
+  };
+
+  const setButtonModifier = () => {
+    if (pathname === movies && isSaved) {
+      return 'card__save_type_saved';
+    } else if (pathname === saved) {
+      return 'card__save_type_delete';
+    } else {
+      return '';
+    }
   };
 
   return (
@@ -25,24 +67,18 @@ const MoviesCard = ({
                 isSavedCard ? 'card__title_saved' : ''
               }`}
             >
-              {title}
+              {nameRU}
             </h2>
             <p
               className={`card__time ${isSavedCard ? 'card__time_saved' : ''}`}
             >
-              {setTimeFormat(time)}
+              {setTimeFormat(duration)}
             </p>
           </figcaption>
-          <img src={img} alt={`Фильм: "${title}"`} className="card__img" />
+          <img src={image} alt={`Фильм: "${nameRU}"`} className="card__img" />
         </figure>
         <button
-          className={`card__save ${
-            isSavedCard
-              ? 'card__save_type_delete'
-              : isSaved
-              ? 'card__save_type_saved'
-              : ''
-          }`}
+          className={`card__save ${setButtonModifier()}`}
           type="button"
           onClick={toggleStateCard}
         />

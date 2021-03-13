@@ -3,11 +3,10 @@ import { useLocation } from 'react-router-dom';
 import MoviesCard from './../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
 import { PATHNAME, MOVIES_API_BASE_URL } from '../../utils/constants';
-import { createObjectFromKeys } from '../../utils/utils';
 
 const { movies, saved } = PATHNAME;
 
-const MoviesCardList = ({ isSaved, movieList }) => {
+const MoviesCardList = ({ isSaved, movieList, onDeleteMovie, onSaveMovie }) => {
   const { pathname } = useLocation();
 
   return (
@@ -21,27 +20,39 @@ const MoviesCardList = ({ isSaved, movieList }) => {
       }`}
     >
       {movieList &&
-        movieList.map((movie, index) => {
+        movieList.map((movie) => {
           const {
+            id,
             nameRU,
+            nameEN,
             duration,
-            url,
+            image,
             trailerLink,
-          } = createObjectFromKeys(movie, [
-            'nameRU',
-            'duration',
-            'image.url',
-            'trailerLink',
-          ]);
+            country,
+            director,
+            year,
+            description,
+          } = movie;
 
           return (
-            <li className="movies-cardlist__item" key={index}>
+            <li className="movies-cardlist__item" key={id}>
               <MoviesCard
+                id={id}
                 isSavedCard={isSaved}
-                title={nameRU || ''}
-                time={duration || ''}
-                img={`${MOVIES_API_BASE_URL}${url || ''}`}
+                nameRU={nameRU || ''}
+                nameEN={nameEN || ''}
+                duration={duration || ''}
+                image={`${MOVIES_API_BASE_URL}${image.url || ''}`}
                 trailerLink={trailerLink || ''}
+                country={country || ''}
+                director={director || ''}
+                description={description || ''}
+                year={year || ''}
+                thumbnail={`${MOVIES_API_BASE_URL}${
+                  image.formats.thumbnail.url || ''
+                }`}
+                onDeleteMovie={onDeleteMovie}
+                onSaveMovie={onSaveMovie}
               />
             </li>
           );
