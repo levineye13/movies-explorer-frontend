@@ -39,7 +39,7 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(true);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
-  const [user, setUser] = useState({
+  const [currentUser, setCurrentUser] = useState({
     name: 'Никнейм',
     email: 'Почта',
   });
@@ -61,6 +61,7 @@ const App = () => {
     try {
       const res = await mainApi.register({ email, password, name });
       if (res) {
+        setCurrentUser(res);
         authorizeUser();
       }
     } catch (err) {
@@ -73,7 +74,6 @@ const App = () => {
       const res = await mainApi.login({ email, password });
       if (res) {
         authorizeUser();
-        setUser(res);
       }
     } catch (err) {
       console.error(err);
@@ -95,7 +95,7 @@ const App = () => {
     try {
       const res = await mainApi.updateUser({ email, name });
       if (res) {
-        setUser(res);
+        setCurrentUser(res);
       }
     } catch (err) {
       console.error(err);
@@ -179,6 +179,22 @@ const App = () => {
     setLastCardIndex(lastCardIndex + numberAddMovies);
 
   useEffect(() => {
+    const getUserData = async () => {
+      try {
+        const userData = await mainApi.getUser();
+        if (userData) {
+          setCurrentUser(userData);
+          authorizeUser();
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getUserData();
+  }, []);
+
+  useEffect(() => {
     const dataMovies = localStorage.getItem(moviesKey);
     try {
       if (dataMovies) {
@@ -209,7 +225,7 @@ const App = () => {
   }, [deviceWidth]);
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={currentUser}>
       <div className="page">
         {checkDisplayComponent(
           HEADER_DISPLAY,
