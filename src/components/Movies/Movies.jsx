@@ -4,52 +4,25 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import ButtonAddMovies from '../ButtonAddMovies/ButtonAddMovies';
 import Preloader from '../Preloader/Preloader';
-import moviesApi from '../../utils/Api/MoviesApi';
 import './Movies.css';
+import { filterShortMovies } from '../../utils/utils';
 
-import {
-  getScreenWidth,
-  determineNumberOfCards,
-  filterByKeyword,
-  filterShortMovies,
-} from '../../utils/utils';
-import { LOCAL_STORAGE_KEYS } from '../../utils/constants';
-const { movies: moviesKey } = LOCAL_STORAGE_KEYS;
-
-const Movies = () => {
-  const [movies, setMovies] = useState([]);
+const Movies = ({
+  movies,
+  lastCardIndex,
+  addCards,
+  onSubmit,
+  onDeleteMovie,
+  onSaveMovie,
+}) => {
   const [shortMovies, setShortMovies] = useState([]);
   const [isShorted, setIsShorted] = useState(false);
   const [isActivePreloader, setIsActivePreloader] = useState(false);
-  const [deviceWidth, setDeviceWidth] = useState(0);
-  const [lastCardIndex, setLastCardIndex] = useState(0);
 
-  const setDataMovies = (moviesData) => {
-    localStorage.setItem(moviesKey, JSON.stringify(moviesData));
-    setMovies(moviesData);
-  };
-
-  const addCards = () => {
-    setLastCardIndex(lastCardIndex + determineNumberOfCards(deviceWidth).add);
-  };
-
-  const handleSubmit = async ({ keyword }) => {
+  const handleSubmit = async (keyword) => {
     setIsActivePreloader(true);
-    try {
-      const res = await moviesApi.getMovies();
-
-      if (res) {
-        localStorage.removeItem(moviesKey);
-        setLastCardIndex(determineNumberOfCards(deviceWidth).base);
-        const filtered = filterByKeyword(res, ['nameRU', 'nameEN'], keyword);
-        if (filtered.length > 0) {
-          setDataMovies(filtered);
-        }
-        setIsActivePreloader(false);
-      }
-    } catch (err) {
-      console.error(err);
-    }
+    await onSubmit(keyword);
+    setIsActivePreloader(false);
   };
 
   const toggleShortMovies = () => {
@@ -59,36 +32,6 @@ const Movies = () => {
   useEffect(() => {
     setShortMovies(filterShortMovies(movies));
   }, [movies]);
-
-  useEffect(() => {
-    const dataMovies = localStorage.getItem(moviesKey);
-    try {
-      if (dataMovies) {
-        setMovies(JSON.parse(dataMovies));
-      }
-    } catch (err) {
-      console.error(err);
-    }
-  }, []);
-
-  useEffect(() => {
-    let timerId = null;
-
-    const updateWindowWidth = () => {
-      clearTimeout(timerId);
-      timerId = setTimeout(() => setDeviceWidth(getScreenWidth()), 1000);
-    };
-
-    window.addEventListener('resize', updateWindowWidth);
-
-    return () => window.removeEventListener('resize', updateWindowWidth);
-  }, []);
-
-  useEffect(() => {
-    const width = getScreenWidth();
-    setDeviceWidth(width);
-    setLastCardIndex(determineNumberOfCards(width).base);
-  }, [deviceWidth]);
 
   return (
     <section className="movies page__movies">
@@ -101,6 +44,8 @@ const Movies = () => {
             movieList={
               !isShorted ? movies.slice(0, lastCardIndex) : shortMovies
             }
+            onDeleteMovie={onDeleteMovie}
+            onSaveMovie={onSaveMovie}
           />
           {movies.length > 3 && movies[lastCardIndex] && !isShorted && (
             <ButtonAddMovies addCards={addCards} />
