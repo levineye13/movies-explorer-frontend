@@ -3,7 +3,7 @@ import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { patternName } from '../../utils/constants';
 
-const Profile = ({ onUpdateUser }) => {
+const Profile = ({ onUpdateUser, onUnauthorization }) => {
   const { values, isValidForm, handleInputChange } = useFormWithValidation();
 
   const handleSubmit = async (evt) => {
@@ -49,10 +49,17 @@ const Profile = ({ onUpdateUser }) => {
             />
           </label>
         </fieldset>
+        <span className="profile__request-error">
+          При обновлении профиля произошла ошибка.
+        </span>
         <button className="profile__edit" type="submit" disabled={!isValidForm}>
           Редактировать
         </button>
-        <button className="profile__logout" type="submit">
+        <button
+          className="profile__logout"
+          type="button"
+          onClick={onUnauthorization}
+        >
           Выйти из аккаунта
         </button>
       </form>

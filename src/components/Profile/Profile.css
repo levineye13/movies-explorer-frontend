@@ -75,6 +75,16 @@
   font-weight: 400;
 }
 
+.profile__request-error {
+  visibility: hidden;
+  display: block;
+  color: #ee3465;
+  margin: 190px 0 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.18;
+}
+
 .profile__edit,
 .profile__logout {
   cursor: pointer;
@@ -84,7 +94,7 @@
 }
 
 .profile__edit {
-  margin: 220px 0 0;
+  margin: 20px 0 0;
   font-weight: 400;
 }
 
@@ -108,8 +118,8 @@
     margin-top: 96px;
   }
 
-  .profile__edit {
-    margin-top: 210px;
+  .profile__request-error {
+    margin-top: 180px;
   }
 }
 
@@ -119,8 +129,8 @@
     width: 260px;
   }
 
-  .profile__edit {
-    margin-top: 379px;
+  .profile__request-error {
+    margin-top: 350px;
   }
 
   .profile__edit,
