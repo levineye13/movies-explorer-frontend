@@ -14,11 +14,11 @@ export const useFormWithValidation = () => {
     setIsValidForm(target.closest('form').checkValidity());
   };
 
-  const resetForm = ({
+  const resetForm = (
     newValues = {},
     newErrors = {},
-    newIsValidForm = false,
-  }) => {
+    newIsValidForm = false
+  ) => {
     setValues(newValues);
     setErrors(newErrors);
     setIsValidForm(newIsValidForm);
