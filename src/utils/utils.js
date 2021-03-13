@@ -73,7 +73,7 @@ export const filterByKeyword = (collection, propertyList, keyword) =>
           .toLowerCase()
           .includes(keyword.trim().toLowerCase())
       ) {
-        return item[property];
+        return item;
       }
     })
   );
