@@ -37,8 +37,19 @@
   flex-direction: column;
 }
 
+.authentication__request-error {
+  visibility: hidden;
+  display: block;
+  text-align: center;
+  color: #ee3465;
+  margin: 49px 0 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.18;
+}
+
 .authentication__submit {
-  margin-top: 69px;
+  margin-top: 20px;
   padding: 13px 0 15px;
   border: 1px solid transparent;
   outline: 0;
@@ -99,8 +110,11 @@
     text-align: center;
   }
 
+  .authentication__request-error {
+    margin-top: 137px;
+  }
+
   .authentication__submit {
-    margin-top: 157px;
     padding: 15px 0 15px;
     font-size: 12px;
     font-weight: 500;

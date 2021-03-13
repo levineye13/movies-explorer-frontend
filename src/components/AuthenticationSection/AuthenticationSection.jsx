@@ -39,6 +39,9 @@ const AuthenticationSection = ({
           onSubmit={handleSubmit}
         >
           <fieldset className="authentication__user-input">{children}</fieldset>
+          <span className="authentication__request-error">
+            Вы ввели неправильный логин или пароль.
+          </span>
           <button
             className="authentication__submit"
             type="submit"
