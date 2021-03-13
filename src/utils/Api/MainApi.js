@@ -24,7 +24,7 @@ class MainApi extends Api {
       }),
       ...this._options,
     });
-    return this._handleResponceWithBody(res);
+    return this._handleResponceWithoutBody(res);
   };
 
   register = async ({ email, password, name }) => {
@@ -51,7 +51,7 @@ class MainApi extends Api {
   };
 
   getUser = async () => {
-    const res = fetch(`${this._baseUrl}${me}`, {
+    const res = await fetch(`${this._baseUrl}${me}`, {
       method: GET,
       headers: this._headers,
       ...this._options,
@@ -60,7 +60,7 @@ class MainApi extends Api {
   };
 
   updateUser = async ({ email, name }) => {
-    const res = fetch(`${this._baseUrl}${me}`, {
+    const res = await fetch(`${this._baseUrl}${me}`, {
       method: PATCH,
       headers: this._headers,
       body: JSON.stringify({
