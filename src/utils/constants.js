@@ -60,6 +60,7 @@ export const SOCIAL = {
 
 export const LOCAL_STORAGE_KEYS = {
   movies: 'movies',
+  savedMovies: 'savedMovies',
   user: 'user',
 };
 
