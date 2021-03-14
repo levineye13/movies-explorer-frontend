@@ -32,6 +32,16 @@ export const createObjectFromKeys = (obj, keysList) => {
   }, {});
 };
 
+export const checkObjectProperty = (obj, path) => {
+  const keys = path.split('.');
+  return keys.reduce((prev, key) => {
+    if (prev === undefined || prev === null) {
+      return undefined;
+    }
+    return prev[key];
+  }, obj);
+};
+
 export const getScreenWidth = () => window.screen.width;
 
 export const determineNumberOfCards = (screenWidth) => {
