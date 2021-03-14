@@ -1,18 +1,32 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { patternName } from '../../utils/constants';
+import { UserContext } from '../../contexts/UserContext';
 
 const Profile = ({ onUpdateUser, onUnauthorization }) => {
-  const { values, isValidForm, handleInputChange } = useFormWithValidation();
+  const {
+    values,
+    isValidForm,
+    handleInputChange,
+    resetForm,
+  } = useFormWithValidation();
+  const currentUser = useContext(UserContext);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+
     await onUpdateUser({
       name: values.name,
       email: values.email,
     });
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      resetForm(currentUser, {}, true);
+    }
+  }, []);
 
   return (
     <section className="profile page__profile">
