@@ -89,3 +89,5 @@ export const HTTP_ERRORS = {
     message: 'Пользователь с таким email уже существует.',
   },
 };
+
+export const TAB_KEY = 'Tab';

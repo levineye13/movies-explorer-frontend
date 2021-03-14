@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './AuthenticationSection.css';
 import logo from './../../images/logo.svg';
+import { TAB_KEY } from '../../utils/constants';
 
 const AuthenticationSection = ({
   title,
@@ -15,7 +16,7 @@ const AuthenticationSection = ({
   onSubmit,
 }) => {
   const handleFocus = (evt) => {
-    if (evt.key === 'Tab') {
+    if (evt.key === TAB_KEY) {
       evt.preventDefault();
       inputRef.current.focus();
     }
