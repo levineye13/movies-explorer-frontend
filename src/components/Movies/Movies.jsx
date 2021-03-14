@@ -31,7 +31,7 @@ const Movies = ({
 
   useEffect(() => {
     setShortMovies(filterShortMovies(movies));
-  }, []);
+  }, [isShorted]);
 
   return (
     <section className="movies page__movies">

@@ -27,7 +27,7 @@ const SavedMovies = ({
 
   useEffect(() => {
     setShortMovies(filterShortMovies(savedMovies));
-  }, []);
+  }, [isShorted]);
 
   return (
     <section className="saved-movies page__saved-movies">
