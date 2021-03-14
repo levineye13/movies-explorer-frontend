@@ -41,6 +41,10 @@
   border-color: #eee;
 }
 
+.form-field__input:invalid {
+  color: #ee3465;
+}
+
 .form-field__error {
   color: #ee3465;
   position: absolute;

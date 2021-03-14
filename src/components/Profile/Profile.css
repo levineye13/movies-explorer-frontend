@@ -75,6 +75,10 @@
   font-weight: 400;
 }
 
+.profile__input:invalid {
+  color: #ee3465;
+}
+
 .profile__request-error {
   visibility: hidden;
   display: block;
