@@ -12,8 +12,8 @@ const Movies = ({
   lastCardIndex,
   addCards,
   onSubmit,
-  onDeleteMovie,
-  onSaveMovie,
+  onClickSaveButton,
+  checkMovieSave,
 }) => {
   const [shortMovies, setShortMovies] = useState([]);
   const [isShorted, setIsShorted] = useState(false);
@@ -31,7 +31,7 @@ const Movies = ({
 
   useEffect(() => {
     setShortMovies(filterShortMovies(movies));
-  }, [movies]);
+  }, []);
 
   return (
     <section className="movies page__movies">
@@ -40,12 +40,11 @@ const Movies = ({
       {movies.length > 0 && (
         <>
           <MoviesCardList
-            isSaved={false}
             movieList={
               !isShorted ? movies.slice(0, lastCardIndex) : shortMovies
             }
-            onDeleteMovie={onDeleteMovie}
-            onSaveMovie={onSaveMovie}
+            onClickSaveButton={onClickSaveButton}
+            checkMovieSave={checkMovieSave}
           />
           {movies.length > 3 && movies[lastCardIndex] && !isShorted && (
             <ButtonAddMovies addCards={addCards} />

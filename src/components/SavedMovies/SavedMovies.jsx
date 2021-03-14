@@ -5,7 +5,12 @@ import Preloader from '../Preloader/Preloader';
 import './SavedMovies.css';
 import { filterShortMovies } from '../../utils/utils';
 
-const SavedMovies = ({ savedMovies, onSubmit, onDeleteMovie }) => {
+const SavedMovies = ({
+  savedMovies,
+  onSubmit,
+  onDeleteMovie,
+  checkMovieSave,
+}) => {
   const [shortMovies, setShortMovies] = useState([]);
   const [isShorted, setIsShorted] = useState(false);
   const [isActivePreloader, setIsActivePreloader] = useState(false);
@@ -21,17 +26,18 @@ const SavedMovies = ({ savedMovies, onSubmit, onDeleteMovie }) => {
   };
 
   useEffect(() => {
-    setShortMovies(filterShortMovies(shortMovies));
-  }, [shortMovies]);
+    setShortMovies(filterShortMovies(savedMovies));
+  }, []);
 
   return (
     <section className="saved-movies page__saved-movies">
       <Preloader isActive={isActivePreloader} />
       <SearchForm onSubmit={handleSubmit} filter={toggleShortMovies} />
       <MoviesCardList
-        isSaved={true}
-        movieList={!isShorted ? savedMovies : savedMovies}
-        onDeleteMovie={onDeleteMovie}
+        movieList={!isShorted ? savedMovies : shortMovies}
+        savedMovies={savedMovies}
+        onClickSaveButton={onDeleteMovie}
+        checkMovieSave={checkMovieSave}
       />
     </section>
   );

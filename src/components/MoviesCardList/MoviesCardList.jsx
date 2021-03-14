@@ -2,11 +2,11 @@ import React from 'react';
 import { useLocation } from 'react-router-dom';
 import MoviesCard from './../MoviesCard/MoviesCard';
 import './MoviesCardList.css';
-import { PATHNAME, MOVIES_API_BASE_URL } from '../../utils/constants';
+import { PATHNAME } from '../../utils/constants';
 
 const { movies, saved } = PATHNAME;
 
-const MoviesCardList = ({ isSaved, movieList, onDeleteMovie, onSaveMovie }) => {
+const MoviesCardList = ({ movieList, onClickSaveButton, checkMovieSave }) => {
   const { pathname } = useLocation();
 
   return (
@@ -21,38 +21,14 @@ const MoviesCardList = ({ isSaved, movieList, onDeleteMovie, onSaveMovie }) => {
     >
       {movieList &&
         movieList.map((movie) => {
-          const {
-            id,
-            nameRU,
-            nameEN,
-            duration,
-            image,
-            trailerLink,
-            country,
-            director,
-            year,
-            description,
-          } = movie;
-
+          const isSavedMovie =
+            pathname === saved ? true : checkMovieSave(movie);
           return (
-            <li className="movies-cardlist__item" key={id}>
+            <li className="movies-cardlist__item" key={movie.id}>
               <MoviesCard
-                id={id}
-                isSavedCard={isSaved}
-                nameRU={nameRU || ''}
-                nameEN={nameEN || ''}
-                duration={duration || ''}
-                image={`${MOVIES_API_BASE_URL}${image.url || ''}`}
-                trailerLink={trailerLink || ''}
-                country={country || ''}
-                director={director || ''}
-                description={description || ''}
-                year={year || ''}
-                thumbnail={`${MOVIES_API_BASE_URL}${
-                  image.formats.thumbnail.url || ''
-                }`}
-                onDeleteMovie={onDeleteMovie}
-                onSaveMovie={onSaveMovie}
+                movie={movie}
+                isSavedCard={isSavedMovie}
+                onClickSaveButton={onClickSaveButton}
               />
             </li>
           );

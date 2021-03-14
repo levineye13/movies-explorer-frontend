@@ -20,12 +20,14 @@ import {
   HEADER_DISPLAY,
   FOOTER_DISPLAY,
   LOCAL_STORAGE_KEYS,
+  MOVIES_API_BASE_URL,
 } from './../../utils/constants';
 import {
   checkDisplayComponent,
   getScreenWidth,
   filterByKeyword,
   determineNumberOfCards,
+  checkObjectProperty,
 } from '../../utils/utils';
 
 const { root, movies: moviesPath, saved, profile, signin, signup } = PATHNAME;
@@ -36,7 +38,7 @@ const App = () => {
   const { pathname } = useLocation();
   const history = useHistory();
 
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
   const [currentUser, setCurrentUser] = useState({
@@ -118,9 +120,11 @@ const App = () => {
 
   const handleGetSavedMoviesByKeyword = async (keyword) => {
     try {
-      const res = JSON.parse(localStorage.getItem(savedMoviesKey));
-      if (res && res.length > 0) {
+      const res = await mainApi.getMovies();
+      if (res) {
+        localStorage.removeItem(savedMoviesKey);
         const filtered = filterByKeyword(res, ['nameRU', 'nameEN'], keyword);
+        localStorage.setItem(savedMoviesKey, JSON.stringify(filtered));
         setSavedMovies(filtered);
       }
     } catch (err) {
@@ -128,47 +132,50 @@ const App = () => {
     }
   };
 
-  const handleSaveMovie = async ({
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailer,
-    thumbnail,
-    movieId,
-    nameRU,
-    nameEN,
-  }) => {
+  const handleSaveMovie = async (card) => {
+    const index = movies.findIndex((movie) => movie.id === card.id);
     try {
       const newMovie = await mainApi.createMovie({
-        country,
-        director,
-        duration,
-        year,
-        description,
-        image,
-        trailer,
-        thumbnail,
-        movieId,
-        nameRU,
-        nameEN,
+        country: card.country,
+        director: card.director,
+        duration: card.duration,
+        year: card.year,
+        description: card.description,
+        image: `${MOVIES_API_BASE_URL}${checkObjectProperty(
+          card,
+          'image.url'
+        )}`,
+        trailer: card.trailerLink,
+        thumbnail: `${MOVIES_API_BASE_URL}${checkObjectProperty(
+          card,
+          'image.formats.thumbnail.url'
+        )}`,
+        movieId: card.id,
+        nameRU: card.nameRU,
+        nameEN: card.nameEN,
       });
-      if (newMovie) {
-        setSavedMovies([...savedMovies, newMovie]);
-      }
+      setSavedMovies([...savedMovies, newMovie]);
+      const _id = newMovie._id;
+      const newMovies = [
+        ...movies.slice(0, index),
+        { ...movies[index], _id },
+        ...movies.slice(index + 1),
+      ];
+      localStorage.setItem(moviesKey, JSON.stringify(newMovies));
+      setMovies(newMovies);
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleDeleteMovie = async ({ id }) => {
+  const handleDeleteMovie = async (card) => {
     try {
-      const res = await mainApi.deleteMovie({ id });
+      const res = await mainApi.deleteMovie({ id: card._id });
       if (res) {
-        const newMovies = movies.filter((movie) => movie.id !== id);
-        setMovies(newMovies);
+        const newMovies = savedMovies.filter((movie) => movie._id !== card._id);
+        localStorage.removeItem(savedMoviesKey);
+        localStorage.setItem(savedMoviesKey, JSON.stringify(newMovies));
+        setSavedMovies(newMovies);
       }
     } catch (err) {
       console.error(err);
@@ -177,6 +184,21 @@ const App = () => {
 
   const handleClickAddButton = () =>
     setLastCardIndex(lastCardIndex + numberAddMovies);
+
+  const handleClickSaveButton = async (card, isLiked) => {
+    try {
+      if (isLiked) {
+        await handleDeleteMovie(card);
+      } else {
+        await handleSaveMovie(card);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const checkCardSave = (card) =>
+    savedMovies.some((movie) => movie.movieId === card.id);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -203,6 +225,22 @@ const App = () => {
     } catch (err) {
       console.error(err);
     }
+  }, []);
+
+  useEffect(() => {
+    const getSavedMovies = async () => {
+      try {
+        const res = await mainApi.getMovies();
+        if (res && res.length > 0) {
+          localStorage.setItem(savedMoviesKey, JSON.stringify(res));
+          setSavedMovies(res);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    getSavedMovies();
   }, []);
 
   useEffect(() => {
@@ -242,8 +280,8 @@ const App = () => {
             lastCardIndex={lastCardIndex}
             addCards={handleClickAddButton}
             onSubmit={handleGetMoviesByKeyword}
-            onDeleteMovie={handleDeleteMovie}
-            onSaveMovie={handleSaveMovie}
+            onClickSaveButton={handleClickSaveButton}
+            checkMovieSave={checkCardSave}
           />
           <ProtectedRoute
             component={SavedMovies}
@@ -252,6 +290,7 @@ const App = () => {
             savedMovies={savedMovies}
             onSubmit={handleGetSavedMoviesByKeyword}
             onDeleteMovie={handleDeleteMovie}
+            checkMovieSave={checkCardSave}
           />
           <ProtectedRoute
             component={Profile}
