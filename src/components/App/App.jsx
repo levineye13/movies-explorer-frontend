@@ -122,9 +122,7 @@ const App = () => {
     try {
       const res = await mainApi.getMovies();
       if (res) {
-        localStorage.removeItem(savedMoviesKey);
         const filtered = filterByKeyword(res, ['nameRU', 'nameEN'], keyword);
-        localStorage.setItem(savedMoviesKey, JSON.stringify(filtered));
         setSavedMovies(filtered);
       }
     } catch (err) {
