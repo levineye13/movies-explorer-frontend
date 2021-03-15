@@ -4,7 +4,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { patternName } from '../../utils/constants';
 import { UserContext } from '../../contexts/UserContext';
 
-const Profile = ({ onUpdateUser, onUnauthorization }) => {
+const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
   const {
     values,
     isValidForm,
@@ -22,6 +22,9 @@ const Profile = ({ onUpdateUser, onUnauthorization }) => {
     });
   };
 
+  const checkEqualInput = () =>
+    currentUser.name !== values.name || currentUser.email !== values.email;
+
   useEffect(() => {
     if (currentUser) {
       resetForm(currentUser, {}, true);
@@ -30,7 +33,7 @@ const Profile = ({ onUpdateUser, onUnauthorization }) => {
 
   return (
     <section className="profile page__profile">
-      <h1 className="profile__title">Привет, Олег!</h1>
+      <h1 className="profile__title">{`Привет, ${currentUser.name}!`}</h1>
       <form
         action="#"
         className="profile__form"
@@ -46,7 +49,10 @@ const Profile = ({ onUpdateUser, onUnauthorization }) => {
               className="profile__input"
               name="name"
               required
-              onChange={handleInputChange}
+              onChange={(evt) => {
+                handleInputChange(evt);
+                checkEqualInput();
+              }}
               value={values.name || ''}
               pattern={patternName}
             />
@@ -58,15 +64,20 @@ const Profile = ({ onUpdateUser, onUnauthorization }) => {
               className="profile__input"
               name="email"
               required
-              onChange={handleInputChange}
+              onChange={(evt) => {
+                handleInputChange(evt);
+                checkEqualInput();
+              }}
               value={values.email || ''}
             />
           </label>
         </fieldset>
-        <span className="profile__request-error">
-          При обновлении профиля произошла ошибка.
-        </span>
-        <button className="profile__edit" type="submit" disabled={!isValidForm}>
+        <span className="profile__request-error">{networkError}</span>
+        <button
+          className="profile__edit"
+          type="submit"
+          disabled={!isValidForm || !checkEqualInput()}
+        >
           Редактировать
         </button>
         <button
