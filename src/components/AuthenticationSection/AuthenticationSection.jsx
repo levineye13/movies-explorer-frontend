@@ -11,6 +11,7 @@ const AuthenticationSection = ({
   question,
   pathname,
   textLink,
+  textError,
   inputRef,
   isValidForm,
   onSubmit,
@@ -40,9 +41,7 @@ const AuthenticationSection = ({
           onSubmit={handleSubmit}
         >
           <fieldset className="authentication__user-input">{children}</fieldset>
-          <span className="authentication__request-error">
-            Вы ввели неправильный логин или пароль.
-          </span>
+          <span className="authentication__request-error">{textError}</span>
           <button
             className="authentication__submit"
             type="submit"

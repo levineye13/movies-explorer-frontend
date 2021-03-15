@@ -71,22 +71,20 @@ export const DISPLAY_RESOLUTION = {
 };
 
 export const HTTP_ERRORS = {
-  serverError: {
-    status: 500,
-    message: 'На сервере произошла ошибка.',
+  loginError: {
+    unauthorized: 'Вы ввели неправильный логин или пароль.',
+    defaultMessage: 'При авторизации произошла ошибка.',
   },
-  badRequestError: {
-    status: 400,
-    message:
-      'При авторизации произошла ошибка. Токен не передан или передан не в том формате.',
+  registerError: {
+    conflict: 'Пользователь с таким email уже существует.',
+    defaultMessage: 'При регистрации пользователя произошла ошибка.',
+  },
+  updateError: {
+    conflict: 'Пользователь с таким email уже существует.',
+    defaultMessage: 'При обновлении профиля произошла ошибка.',
   },
   notFoundError: {
-    status: 404,
-    message: 'Страница не найдена.',
-  },
-  conflictError: {
-    status: 409,
-    message: 'Пользователь с таким email уже существует.',
+    defaultMessage: 'Страница не найдена.',
   },
 };
 

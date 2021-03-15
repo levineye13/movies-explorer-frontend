@@ -29,6 +29,7 @@ import {
   determineNumberOfCards,
   checkObjectProperty,
 } from '../../utils/utils';
+import { LoginError, RegisterError, UpdateError } from '../../errors/index';
 
 const { root, movies: moviesPath, saved, profile, signin, signup } = PATHNAME;
 const { landing, dark } = HEADER_TYPE;
@@ -48,6 +49,11 @@ const App = () => {
   const [deviceWidth, setDeviceWidth] = useState(0);
   const [lastCardIndex, setLastCardIndex] = useState(0);
   const [numberAddMovies, setNumberAddMovies] = useState(0);
+  const [networkErrors, setNetworkErrors] = useState({
+    loginError: '',
+    registerError: '',
+    updateError: '',
+  });
 
   const authorizeUser = () => {
     setLoggedIn(true);
@@ -67,6 +73,9 @@ const App = () => {
         authorizeUser();
       }
     } catch (err) {
+      if (err instanceof RegisterError) {
+        setNetworkErrors({ ...networkErrors, registerError: err.message });
+      }
       console.error(err);
     }
   };
@@ -78,6 +87,9 @@ const App = () => {
         authorizeUser();
       }
     } catch (err) {
+      if (err instanceof LoginError) {
+        setNetworkErrors({ ...networkErrors, loginError: err.message });
+      }
       console.error(err);
     }
   };
@@ -100,6 +112,9 @@ const App = () => {
         setCurrentUser(res);
       }
     } catch (err) {
+      if (err instanceof UpdateError) {
+        setNetworkErrors({ ...networkErrors, updateError: err.message });
+      }
       console.error(err);
     }
   };
@@ -296,12 +311,19 @@ const App = () => {
             loggedIn={loggedIn}
             onUpdateUser={handleUpdateUser}
             onUnauthorization={handleUnauthorization}
+            networkError={networkErrors.updateError}
           />
           <Route path={signin}>
-            <Login onAuthorization={handleAuthorization} />
+            <Login
+              onAuthorization={handleAuthorization}
+              networkError={networkErrors.loginError}
+            />
           </Route>
           <Route path={signup}>
-            <Register onRegistration={handleRegistration} />
+            <Register
+              onRegistration={handleRegistration}
+              networkError={networkErrors.registerError}
+            />
           </Route>
           <Route path="*" component={NotFound} />
         </Switch>

@@ -6,7 +6,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 const { signup } = PATHNAME;
 
-const Login = ({ onAuthorization }) => {
+const Login = ({ onAuthorization, networkError }) => {
   const firstInputRef = useRef();
   const {
     values,
@@ -53,6 +53,7 @@ const Login = ({ onAuthorization }) => {
       question="Ещё не зарегистрированы?"
       pathname={signup}
       textLink="Регистрация"
+      textError={networkError}
       inputRef={firstInputRef}
       isValidForm={isValidForm}
       onSubmit={handleAuthorization}

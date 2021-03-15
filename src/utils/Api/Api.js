@@ -5,14 +5,24 @@ export default class Api {
     this._options = options;
   }
 
-  _handleResponceWithBody = async (res) => {
+  _handleResponceWithBody = async (res, err) => {
     if (res.ok) {
       return res.json();
     }
-    throw new Error(`Ошибка: ${res.status} - ${res.statusText}`);
+
+    if (err) {
+      throw err;
+    }
+    throw new Error(`${res.status} - ${res.statusText}`);
   };
 
-  _handleResponceWithoutBody = (res) => {
-    return res.ok ? true : false;
+  _handleResponceWithoutBody = (res, err) => {
+    if (res.ok) {
+      return true;
+    }
+    if (err) {
+      throw err;
+    }
+    throw new Error(`${res.status} - ${res.statusText}`);
   };
 }

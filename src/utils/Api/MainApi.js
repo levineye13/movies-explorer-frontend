@@ -1,5 +1,5 @@
 import Api from './Api.js';
-
+import { LoginError, RegisterError, UpdateError } from '../../errors/index';
 import {
   MAIN_API_BASE_URL,
   HTTP_METHODS,
@@ -24,7 +24,7 @@ class MainApi extends Api {
       }),
       ...this._options,
     });
-    return this._handleResponceWithoutBody(res);
+    return this._handleResponceWithoutBody(res, new LoginError(res.status));
   };
 
   register = async ({ email, password, name }) => {
@@ -38,7 +38,7 @@ class MainApi extends Api {
       }),
       ...this._options,
     });
-    return this._handleResponceWithBody(res);
+    return this._handleResponceWithBody(res, new RegisterError(res.status));
   };
 
   logout = async () => {
@@ -69,7 +69,7 @@ class MainApi extends Api {
       }),
       ...this._options,
     });
-    return this._handleResponceWithBody(res);
+    return this._handleResponceWithBody(res, new UpdateError(res.status));
   };
 
   getMovies = async () => {

@@ -38,7 +38,6 @@
 }
 
 .authentication__request-error {
-  visibility: hidden;
   display: block;
   text-align: center;
   color: #ee3465;

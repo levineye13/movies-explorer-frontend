@@ -4,7 +4,7 @@ import './NotFound.css';
 import { HTTP_ERRORS } from '../../utils/constants';
 
 const {
-  notFoundError: { status, message },
+  notFoundError: { defaultMessage },
 } = HTTP_ERRORS;
 
 const NotFound = () => {
@@ -13,8 +13,8 @@ const NotFound = () => {
   return (
     <section className="not-found">
       <div className="not-found__content">
-        <h2 className="not-found__title">{status}</h2>
-        <p className="not-found__subtitle">{message}</p>
+        <h2 className="not-found__title">404</h2>
+        <p className="not-found__subtitle">{defaultMessage}</p>
         <button type="button" className="not-found__back" onClick={goBack}>
           Назад
         </button>
