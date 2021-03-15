@@ -80,7 +80,6 @@
 }
 
 .profile__request-error {
-  visibility: hidden;
   display: block;
   color: #ee3465;
   margin: 190px 0 0;
