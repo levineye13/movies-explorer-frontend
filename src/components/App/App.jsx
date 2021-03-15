@@ -285,7 +285,10 @@ const App = () => {
         {checkDisplayComponent(
           HEADER_DISPLAY,
           pathname,
-          <Header headerType={pathname === root ? landing : dark} />
+          <Header
+            isLoggedIn={loggedIn}
+            theme={pathname === root ? landing : dark}
+          />
         )}
         <Switch>
           <Route exact path={root} component={Main} />
