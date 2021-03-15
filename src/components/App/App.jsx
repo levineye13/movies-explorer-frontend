@@ -84,7 +84,11 @@ const App = () => {
     try {
       const res = await mainApi.login({ email, password });
       if (res) {
-        authorizeUser();
+        const dataUser = await mainApi.getUser();
+        if (dataUser) {
+          setCurrentUser(dataUser);
+          authorizeUser();
+        }
       }
     } catch (err) {
       if (err instanceof LoginError) {
