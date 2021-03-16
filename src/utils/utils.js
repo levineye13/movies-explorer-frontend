@@ -1,8 +1,8 @@
 'use strict';
 
-import { DISPLAY_RESOLUTION } from './constants';
+import { NUMBER_OF_CARDS, SHORT_MOVIE_MAX_MINUTES } from './constants';
 
-const { smallScreen, mediumScreen } = DISPLAY_RESOLUTION;
+const { smallScreen, mediumScreen, largeScreen } = NUMBER_OF_CARDS;
 
 /**
  * Функция возвращает компонент для отображения, если текущий
@@ -57,23 +57,15 @@ export const getScreenWidth = () => window.screen.width;
  */
 export const determineNumberOfCards = (screenWidth) => {
   switch (true) {
-    case screenWidth > mediumScreen:
-      return {
-        base: 12,
-        add: 3,
-      };
+    case screenWidth > mediumScreen.resolution:
+      return largeScreen;
 
-    case screenWidth <= mediumScreen && screenWidth > smallScreen:
-      return {
-        base: 8,
-        add: 2,
-      };
+    case screenWidth <= mediumScreen.resolution &&
+      screenWidth > smallScreen.resolution:
+      return mediumScreen;
 
-    case screenWidth <= smallScreen:
-      return {
-        base: 5,
-        add: 1,
-      };
+    case screenWidth <= smallScreen.resolution:
+      return smallScreen;
   }
 };
 
@@ -118,4 +110,4 @@ export const filterByKeyword = (collection, propertyList, keyword) =>
  * @param  {Array} collection
  */
 export const filterShortMovies = (collection) =>
-  collection.filter((item) => item.duration <= 40);
+  collection.filter((item) => item.duration <= SHORT_MOVIE_MAX_MINUTES);

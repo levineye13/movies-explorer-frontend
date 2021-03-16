@@ -274,9 +274,9 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    const width = getScreenWidth();
-    setLastCardIndex(determineNumberOfCards(width).base);
-    setNumberAddMovies(determineNumberOfCards(width).add);
+    const cards = determineNumberOfCards(getScreenWidth());
+    setLastCardIndex(cards.base);
+    setNumberAddMovies(cards.add);
   }, [deviceWidth]);
 
   return (

@@ -64,10 +64,22 @@ export const LOCAL_STORAGE_KEYS = {
   user: 'user',
 };
 
-export const DISPLAY_RESOLUTION = {
-  smallScreen: 480,
-  mediumScreen: 768,
-  largeScreen: 1280,
+export const NUMBER_OF_CARDS = {
+  largeScreen: {
+    resolution: 1280,
+    base: 12,
+    add: 3,
+  },
+  mediumScreen: {
+    resolution: 768,
+    base: 8,
+    add: 2,
+  },
+  smallScreen: {
+    resolution: 480,
+    base: 5,
+    add: 1,
+  },
 };
 
 export const HTTP_ERRORS = {
@@ -89,3 +101,4 @@ export const HTTP_ERRORS = {
 };
 
 export const TAB_KEY = 'Tab';
+export const SHORT_MOVIE_MAX_MINUTES = 40;
