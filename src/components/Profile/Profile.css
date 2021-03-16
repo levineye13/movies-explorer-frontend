@@ -46,11 +46,12 @@
   padding-bottom: 16px;
   border-bottom: 1px solid transparent;
   transition: border-bottom-color 0.2s;
+  position: relative;
 }
 
 .profile__field:not(:last-child) {
   border-bottom-color: #424242;
-  margin-bottom: 17px;
+  margin-bottom: 35px;
 }
 
 .profile__field:focus-within {
@@ -77,6 +78,14 @@
 
 .profile__input:invalid {
   color: #ee3465;
+}
+
+.profile__error {
+  flex-basis: 100%;
+  color: #ee3465;
+  position: absolute;
+  left: 0;
+  top: calc(100% + 8px);
 }
 
 .profile__request-error {
@@ -130,6 +139,10 @@
   .profile__form {
     margin-top: 80px;
     width: 260px;
+  }
+
+  .profile__field:not(:last-child) {
+    margin-bottom: 40px;
   }
 
   .profile__request-error {

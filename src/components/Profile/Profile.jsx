@@ -7,6 +7,7 @@ import { UserContext } from '../../contexts/UserContext';
 const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
   const {
     values,
+    errors,
     isValidForm,
     handleInputChange,
     resetForm,
@@ -60,6 +61,7 @@ const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
               value={values.name || ''}
               pattern={patternName}
             />
+            <span className="profile__error">{errors.name || ''}</span>
           </label>
           <label className="profile__field">
             Почта
@@ -74,6 +76,7 @@ const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
               }}
               value={values.email || ''}
             />
+            <span className="profile__error">{errors.email || ''}</span>
           </label>
         </fieldset>
         <span className="profile__request-error">{networkError}</span>
