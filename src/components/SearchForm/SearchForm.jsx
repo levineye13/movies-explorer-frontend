@@ -11,9 +11,9 @@ const SearchForm = ({ onSubmit, filter }) => {
     resetForm,
   } = useFormWithValidation();
 
-  const handleSubmit = async (evt) => {
+  const handleSubmit = (evt) => {
     evt.preventDefault();
-    await onSubmit(values.movieInput);
+    onSubmit(values.movieInput);
     resetForm();
   };
 

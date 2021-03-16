@@ -15,9 +15,9 @@ const SavedMovies = ({
   const [isShorted, setIsShorted] = useState(false);
   const [isActivePreloader, setIsActivePreloader] = useState(false);
 
-  const handleSubmit = async (keyword) => {
+  const handleSubmit = (keyword) => {
     setIsActivePreloader(true);
-    await onSubmit(keyword);
+    onSubmit(keyword);
     setIsActivePreloader(false);
   };
 

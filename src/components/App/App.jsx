@@ -123,24 +123,22 @@ const App = () => {
     }
   };
 
-  const handleGetMoviesByKeyword = async (keyword) => {
+  const handleGetMoviesByKeyword = (keyword) => {
     try {
-      const res = await moviesApi.getMovies();
-      if (res) {
-        localStorage.removeItem(moviesKey);
+      const res = JSON.parse(localStorage.getItem(moviesKey));
+      if (res && res.length > 0) {
         const filtered = filterByKeyword(res, ['nameRU', 'nameEN'], keyword);
         setMovies(filtered);
-        localStorage.setItem(moviesKey, JSON.stringify(filtered));
       }
     } catch (err) {
       console.error(err);
     }
   };
 
-  const handleGetSavedMoviesByKeyword = async (keyword) => {
+  const handleGetSavedMoviesByKeyword = (keyword) => {
     try {
-      const res = await mainApi.getMovies();
-      if (res) {
+      const res = JSON.parse(localStorage.getItem(savedMoviesKey));
+      if (res && res.length > 0) {
         const filtered = filterByKeyword(res, ['nameRU', 'nameEN'], keyword);
         setSavedMovies(filtered);
       }
@@ -233,15 +231,26 @@ const App = () => {
     getUserData();
   }, []);
 
+  //Если данные имеются в LS, берем их, иначе делаем запрос.
   useEffect(() => {
-    const dataMovies = localStorage.getItem(moviesKey);
-    try {
-      if (dataMovies) {
-        setMovies(JSON.parse(dataMovies));
+    const getAllMovies = async () => {
+      try {
+        const dataMovies = JSON.parse(localStorage.getItem(moviesKey));
+        if (dataMovies && dataMovies.length > 0) {
+          setMovies(dataMovies);
+        } else {
+          const res = await moviesApi.getMovies();
+          if (res) {
+            localStorage.setItem(moviesKey, JSON.stringify(res));
+            setMovies(res);
+          }
+        }
+      } catch (err) {
+        console.error(err);
       }
-    } catch (err) {
-      console.error(err);
-    }
+    };
+
+    getAllMovies();
   }, []);
 
   useEffect(() => {
