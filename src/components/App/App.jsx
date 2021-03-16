@@ -21,6 +21,7 @@ import {
   FOOTER_DISPLAY,
   LOCAL_STORAGE_KEYS,
   MOVIES_API_BASE_URL,
+  UPDATE_DATA_MESSAGE,
 } from './../../utils/constants';
 import {
   checkDisplayComponent,
@@ -49,10 +50,13 @@ const App = () => {
   const [deviceWidth, setDeviceWidth] = useState(0);
   const [lastCardIndex, setLastCardIndex] = useState(0);
   const [numberAddMovies, setNumberAddMovies] = useState(0);
-  const [networkErrors, setNetworkErrors] = useState({
-    loginError: '',
-    registerError: '',
-    updateError: '',
+  const [networkRequests, setNetworkRequests] = useState({
+    loginMessage: '',
+    registerMessage: '',
+    updateRequest: {
+      updateMessage: '',
+      success: false,
+    },
   });
 
   const authorizeUser = () => {
@@ -74,7 +78,10 @@ const App = () => {
       }
     } catch (err) {
       if (err instanceof RegisterError) {
-        setNetworkErrors({ ...networkErrors, registerError: err.message });
+        setNetworkRequests({
+          ...networkRequests,
+          registerMessage: err.message,
+        });
       }
       console.error(err);
     }
@@ -92,7 +99,10 @@ const App = () => {
       }
     } catch (err) {
       if (err instanceof LoginError) {
-        setNetworkErrors({ ...networkErrors, loginError: err.message });
+        setNetworkRequests({
+          ...networkRequests,
+          loginMessage: err.message,
+        });
       }
       console.error(err);
     }
@@ -114,10 +124,23 @@ const App = () => {
       const res = await mainApi.updateUser({ email, name });
       if (res) {
         setCurrentUser(res);
+        setNetworkRequests({
+          ...networkRequests,
+          updateRequest: {
+            updateMessage: UPDATE_DATA_MESSAGE,
+            success: true,
+          },
+        });
       }
     } catch (err) {
       if (err instanceof UpdateError) {
-        setNetworkErrors({ ...networkErrors, updateError: err.message });
+        setNetworkRequests({
+          ...networkRequests,
+          updateRequest: {
+            updateMessage: err.message,
+            success: false,
+          },
+        });
       }
       console.error(err);
     }
@@ -327,18 +350,18 @@ const App = () => {
             loggedIn={loggedIn}
             onUpdateUser={handleUpdateUser}
             onUnauthorization={handleUnauthorization}
-            networkError={networkErrors.updateError}
+            networkRequest={networkRequests.updateRequest}
           />
           <Route path={signin}>
             <Login
               onAuthorization={handleAuthorization}
-              networkError={networkErrors.loginError}
+              networkRequest={networkRequests.loginMessage}
             />
           </Route>
           <Route path={signup}>
             <Register
               onRegistration={handleRegistration}
-              networkError={networkErrors.registerError}
+              networkRequest={networkRequests.registerMessage}
             />
           </Route>
           <Route path="*" component={NotFound} />

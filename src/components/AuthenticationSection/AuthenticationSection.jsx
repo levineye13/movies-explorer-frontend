@@ -11,7 +11,7 @@ const AuthenticationSection = ({
   question,
   pathname,
   textLink,
-  textError,
+  textRequest,
   inputRef,
   isValidForm,
   onSubmit,
@@ -52,7 +52,7 @@ const AuthenticationSection = ({
           >
             {children}
           </fieldset>
-          <span className="authentication__request-error">{textError}</span>
+          <span className="authentication__request-error">{textRequest}</span>
           <button
             className="authentication__submit"
             type="submit"

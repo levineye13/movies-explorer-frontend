@@ -102,3 +102,4 @@ export const HTTP_ERRORS = {
 
 export const TAB_KEY = 'Tab';
 export const SHORT_MOVIE_MAX_MINUTES = 40;
+export const UPDATE_DATA_MESSAGE = 'Данные успешно обновлены.';

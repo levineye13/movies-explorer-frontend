@@ -4,7 +4,7 @@ import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { patternName } from '../../utils/constants';
 import { UserContext } from '../../contexts/UserContext';
 
-const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
+const Profile = ({ onUpdateUser, onUnauthorization, networkRequest }) => {
   const {
     values,
     errors,
@@ -79,7 +79,13 @@ const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
             <span className="profile__error">{errors.email || ''}</span>
           </label>
         </fieldset>
-        <span className="profile__request-error">{networkError}</span>
+        <span
+          className={`profile__request ${
+            networkRequest.success ? 'profile__request_type_success' : ''
+          }`}
+        >
+          {networkRequest.updateMessage}
+        </span>
         <button
           className="profile__edit"
           type="submit"
