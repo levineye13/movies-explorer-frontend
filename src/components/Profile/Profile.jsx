@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import './Profile.css';
 import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 import { patternName } from '../../utils/constants';
@@ -12,14 +12,18 @@ const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
     resetForm,
   } = useFormWithValidation();
   const currentUser = useContext(UserContext);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    setIsDisabled(true);
 
     await onUpdateUser({
       name: values.name,
       email: values.email,
     });
+
+    setIsDisabled(false);
   };
 
   const checkEqualInput = () =>
@@ -41,7 +45,7 @@ const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
         noValidate
         onSubmit={handleSubmit}
       >
-        <fieldset className="profile__user-info">
+        <fieldset className="profile__user-info" disabled={isDisabled}>
           <label className="profile__field">
             Имя
             <input
@@ -76,7 +80,7 @@ const Profile = ({ onUpdateUser, onUnauthorization, networkError }) => {
         <button
           className="profile__edit"
           type="submit"
-          disabled={!isValidForm || !checkEqualInput()}
+          disabled={!isValidForm || !checkEqualInput() || isDisabled}
         >
           Редактировать
         </button>

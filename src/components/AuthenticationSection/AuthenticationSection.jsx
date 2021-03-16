@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './AuthenticationSection.css';
 import logo from './../../images/logo.svg';
@@ -16,6 +16,8 @@ const AuthenticationSection = ({
   isValidForm,
   onSubmit,
 }) => {
+  const [isDisabled, setIsDisabled] = useState(false);
+
   const handleFocus = (evt) => {
     if (evt.key === TAB_KEY) {
       evt.preventDefault();
@@ -25,7 +27,11 @@ const AuthenticationSection = ({
 
   const handleSubmit = async (evt) => {
     evt.preventDefault();
+    setIsDisabled(true);
+
     await onSubmit();
+
+    setIsDisabled(false);
   };
 
   return (
@@ -40,12 +46,17 @@ const AuthenticationSection = ({
           noValidate
           onSubmit={handleSubmit}
         >
-          <fieldset className="authentication__user-input">{children}</fieldset>
+          <fieldset
+            className="authentication__user-input"
+            disabled={isDisabled}
+          >
+            {children}
+          </fieldset>
           <span className="authentication__request-error">{textError}</span>
           <button
             className="authentication__submit"
             type="submit"
-            disabled={!isValidForm}
+            disabled={!isValidForm || isDisabled}
           >
             {textButton}
           </button>
