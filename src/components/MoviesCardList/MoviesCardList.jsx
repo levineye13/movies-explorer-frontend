@@ -6,7 +6,7 @@ import { PATHNAME } from '../../utils/constants';
 
 const { movies, saved } = PATHNAME;
 
-const MoviesCardList = ({ isSaved, movieList }) => {
+const MoviesCardList = ({ movieList, onClickSaveButton, checkMovieSave }) => {
   const { pathname } = useLocation();
 
   return (
@@ -20,11 +20,19 @@ const MoviesCardList = ({ isSaved, movieList }) => {
       }`}
     >
       {movieList &&
-        movieList.map((movie, index) => (
-          <li className="movies-cardlist__item" key={index}>
-            <MoviesCard isSavedCard={isSaved} img={movie} />
-          </li>
-        ))}
+        movieList.map((movie) => {
+          const isSavedMovie =
+            pathname === saved ? true : checkMovieSave(movie);
+          return (
+            <li className="movies-cardlist__item" key={movie.id}>
+              <MoviesCard
+                movie={movie}
+                isSavedCard={isSavedMovie}
+                onClickSaveButton={onClickSaveButton}
+              />
+            </li>
+          );
+        })}
     </ul>
   );
 };

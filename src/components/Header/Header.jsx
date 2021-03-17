@@ -8,8 +8,8 @@ import { HEADER_TYPE, PATHNAME } from '../../utils/constants';
 const { landing } = HEADER_TYPE;
 const { root, movies, saved, signin, signup, profile } = PATHNAME;
 
-const Header = ({ headerType }) => {
-  const isLanding = headerType === landing ? true : false;
+const Header = ({ isLoggedIn, theme }) => {
+  const isLanding = theme === landing ? true : false;
 
   const [isActiveMenu, setIsActiveMenu] = useState(false);
 
@@ -29,7 +29,7 @@ const Header = ({ headerType }) => {
         </Link>
         <nav
           className={`header__menu ${
-            isLanding ? 'header__menu_invisible' : ''
+            !isLoggedIn ? 'header__menu_invisible' : ''
           }`}
         >
           <NavLink
@@ -48,7 +48,7 @@ const Header = ({ headerType }) => {
             Сохранённые фильмы
           </NavLink>
         </nav>
-        {isLanding ? (
+        {!isLoggedIn ? (
           <nav className="header__menu-auth">
             <Link to={signup} className="header__link-auth">
               Регистрация

@@ -1,22 +1,55 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import ButtonAddMovies from '../ButtonAddMovies/ButtonAddMovies';
-import './Movies.css';
-import { images } from '../../utils/utils';
 import Preloader from '../Preloader/Preloader';
+import './Movies.css';
+import { filterShortMovies } from '../../utils/utils';
 
-const Movies = () => {
+const Movies = ({
+  movies,
+  lastCardIndex,
+  addCards,
+  onSubmit,
+  onClickSaveButton,
+  checkMovieSave,
+}) => {
+  const [shortMovies, setShortMovies] = useState([]);
+  const [isShorted, setIsShorted] = useState(false);
+  const [isActivePreloader, setIsActivePreloader] = useState(false);
+
+  const handleSubmit = (keyword) => {
+    setIsActivePreloader(true);
+    onSubmit(keyword);
+    setIsActivePreloader(false);
+  };
+
+  const toggleShortMovies = () => {
+    setIsShorted(!isShorted);
+  };
+
+  useEffect(() => {
+    setShortMovies(filterShortMovies(movies));
+  }, [isShorted]);
+
   return (
     <section className="movies page__movies">
-      <SearchForm />
-      {images && images.length > 0 ? (
+      <SearchForm onSubmit={handleSubmit} filter={toggleShortMovies} />
+      <Preloader isActive={isActivePreloader} />
+      {movies.length > 0 && (
         <>
-          <MoviesCardList isSaved={false} movieList={images} />
-          <ButtonAddMovies isVisible={true} />
+          <MoviesCardList
+            movieList={
+              !isShorted ? movies.slice(0, lastCardIndex) : shortMovies
+            }
+            onClickSaveButton={onClickSaveButton}
+            checkMovieSave={checkMovieSave}
+          />
+          {movies.length > 3 && movies[lastCardIndex] && !isShorted && (
+            <ButtonAddMovies addCards={addCards} />
+          )}
         </>
-      ) : (
-        <Preloader />
       )}
     </section>
   );

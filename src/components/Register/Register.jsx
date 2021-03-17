@@ -1,23 +1,57 @@
 import React, { useRef } from 'react';
 import AuthenticationSection from '../AuthenticationSection/AuthenticationSection';
 import InputElement from '../InputElement/InputElement';
-import { PATHNAME } from '../../utils/constants';
+import { PATHNAME, patternName } from '../../utils/constants';
+import { useFormWithValidation } from '../../hooks/useFormWithValidation';
 
 const { signin } = PATHNAME;
 
-const Register = () => {
+const Register = ({ onRegistration, networkRequest }) => {
   const firstInputRef = useRef();
+  const {
+    values,
+    errors,
+    isValidForm,
+    handleInputChange,
+  } = useFormWithValidation();
+
+  const handleRegistration = async () => {
+    await onRegistration({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
+  };
 
   const registerChildren = (
     <>
       <InputElement
         inputTitle="Имя"
         type="text"
-        name="nameInput"
+        name="name"
         inputRef={firstInputRef}
+        value={values.name}
+        error={errors.name}
+        onChange={handleInputChange}
+        pattern={patternName}
       />
-      <InputElement inputTitle="E-mail" type="email" name="emailInput" />
-      <InputElement inputTitle="Пароль" type="password" name="passwordInput" />
+      <InputElement
+        inputTitle="E-mail"
+        type="email"
+        name="email"
+        value={values.email}
+        error={errors.email}
+        onChange={handleInputChange}
+      />
+      <InputElement
+        inputTitle="Пароль"
+        type="password"
+        name="password"
+        value={values.password}
+        error={errors.password}
+        onChange={handleInputChange}
+        minLength="8"
+      />
     </>
   );
 
@@ -29,7 +63,10 @@ const Register = () => {
       question="Уже зарегистрированы?"
       pathname={signin}
       textLink="Войти"
+      textRequest={networkRequest}
       inputRef={firstInputRef}
+      isValidForm={isValidForm}
+      onSubmit={handleRegistration}
     />
   );
 };

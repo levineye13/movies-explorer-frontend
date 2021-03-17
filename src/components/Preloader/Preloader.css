@@ -9,8 +9,12 @@
 }
 
 .preloader {
-  display: flex;
+  display: none;
   justify-content: center;
+}
+
+.preloader_active {
+  display: flex;
 }
 
 .preloader__round {

@@ -6,15 +6,13 @@ const InputElement = ({
   type = 'text',
   name = '',
   inputRef = null,
+  value,
+  error,
+  onChange,
+  pattern,
+  minLength,
+  maxLength,
 }) => {
-  const [inputValue, setInputValue] = useState('');
-  const [errorText, setErrorText] = useState('');
-
-  const handleInputChange = ({ target }) => {
-    setInputValue(target.value);
-    setErrorText(target.validationMessage);
-  };
-
   return (
     <label className="form-field">
       <span className="form-field__title">{inputTitle}</span>
@@ -22,12 +20,15 @@ const InputElement = ({
         className="form-field__input"
         type={type}
         name={name}
-        value={inputValue}
+        value={value || ''}
         required
-        onChange={handleInputChange}
+        onChange={onChange}
         ref={inputRef}
+        pattern={pattern}
+        minLength={minLength}
+        maxLength={maxLength}
       />
-      <span className="form-field__error">{errorText}</span>
+      <span className="form-field__error">{error || ''}</span>
     </label>
   );
 };
