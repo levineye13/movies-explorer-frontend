@@ -1,5 +1,7 @@
 # movies-explorer-frontend
 
+> Сайт: http://movies-explorer.students.nomoreparties.xyz
+
 ![HTML5](https://img.shields.io/badge/-HTML5-ff4500?style=flat&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/-CSS3-0000cd?style=flat&logo=CSS3&logoColor=white)
 ![JavaScript](https://img.shields.io/badge/-JavaScript-ffff00?style=flat&logo=JavaScript&logoColor=ff4500)
